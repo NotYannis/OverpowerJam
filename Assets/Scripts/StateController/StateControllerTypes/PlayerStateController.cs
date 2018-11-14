@@ -6,6 +6,6 @@ namespace StateControllerManagement
 {
     public class PlayerStateController : StateController
     {
-
+        public PlayerController playerController;
     }
 }
