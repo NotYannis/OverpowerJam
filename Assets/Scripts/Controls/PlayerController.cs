@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
         get
         {
             if (deviceID != -1)
-                return InputAssignmentManager.Instance.playerDevices[deviceID];
+                return InputManager.ActiveDevice;// InputAssignmentManager.Instance.playerDevices[deviceID];
             else
                 return null;
         }
@@ -39,8 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dropOutTimer);
         
-        InputAssignmentManager.Instance.RemovePlayerDevice(deviceID);
-        PlayerContainer.Instance.RemovePlayerByController(this);
+        //InputAssignmentManager.Instance.RemovePlayerDevice(deviceID);
+        //PlayerContainer.Instance.RemovePlayerByController(this);
         
         yield return null;
     }

@@ -12,6 +12,7 @@ public class DetectNoControllerAttachedDecision : Decision
 
     private bool CheckInputAssignmentManager()
     {
-        return !InputAssignmentManager.Instance.controllerAssigned;
+        return false;
+        //return !InputAssignmentManager.Instance.controllerAssigned;
     }
 }
