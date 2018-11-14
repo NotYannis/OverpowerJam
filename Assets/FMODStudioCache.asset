@@ -13,13 +13,72 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114498348867079450}
-  - {fileID: 114566641687883316}
+  - {fileID: 114908013268104176}
+  - {fileID: 114169907928297348}
   EditorEvents: []
-  MasterBankRef: {fileID: 114566641687883316}
-  StringsBankRef: {fileID: 114498348867079450}
+  MasterBankRef: {fileID: 114169907928297348}
+  StringsBankRef: {fileID: 114908013268104176}
   stringsBankWriteTime: 636778002826958833
   cacheVersion: 2
+--- !u!114 &114020250270126890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: OverpoweredAudio\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636778002826958833
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 672
+  Exists: 1
+--- !u!114 &114169907928297348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\yannis.attard\Documents\Unity Projects\JamByJam\OverpoweredAudio\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636778002826909007
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 12474
+  Exists: 1
+--- !u!114 &114480196513750678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\yannis.attard\Documents\Unity Projects\JamByJam\OverpoweredAudio\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636778002826909007
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 12474
+  Exists: 1
 --- !u!114 &114498348867079450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,4 +117,23 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 12474
+  Exists: 1
+--- !u!114 &114908013268104176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: OverpoweredAudio\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636778002826958833
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 672
   Exists: 1

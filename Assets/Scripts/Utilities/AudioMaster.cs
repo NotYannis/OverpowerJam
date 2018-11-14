@@ -26,9 +26,10 @@ public class AudioMaster : MonoBehaviour
             return _instance;
         }
     }
-
-    uint bankID = 0;
-    int bankIDUnload;
+#pragma warning disable 414
+	uint bankID = 0;
+#pragma warning restore 414
+	int bankIDUnload;
     public bool loadBankByScript;
     public string soundBankName;
     public bool mute;
@@ -36,12 +37,14 @@ public class AudioMaster : MonoBehaviour
     float lastBeat;
 
     public delegate void OnBeat(float tempo);
-    public event OnBeat OnBeatEvent;
+#pragma warning disable 67
+	public event OnBeat OnBeatEvent;
 
     public delegate void OnBar();
     public event OnBar OnBarEvent;
+#pragma warning restore 67
 
-    private void Awake()
+	private void Awake()
     {
         if (_instance is AudioMaster)
         {

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderEnter : MonoBehaviour
+public class MoreThanGrowthRateDecision : MonoBehaviour
 {
-	private float stat;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +15,4 @@ public class ColliderEnter : MonoBehaviour
     {
         
     }
-
-	private void OnCollisionEnter2D(Collision2D other)
-	{
-		stat++;
-	}
 }
