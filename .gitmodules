@@ -1,0 +1,3 @@
+[submodule "OverpoweredAudio"]
+	path = OverpoweredAudio
+	url = https://github.com/NotYannis/OverpoweredAudio.git

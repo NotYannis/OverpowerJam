@@ -6,15 +6,17 @@ using UnityEngine.UI;
 public class TextFadeInOutAlphaChangeHighlight : HighlightEffect
 {
     [SerializeField]
-    float fadeSpeed;
+#pragma warning disable 649
+	float fadeSpeed;
     [SerializeField]
     [Range(0.0f,1.0f)]
-    float min;
+	float min;
     [SerializeField]
     [Range(0.0f, 1.0f)]
-    float max;
-    
-    public override void Highlight(MenuSelection selection)
+	float max;
+#pragma warning restore 649
+
+	public override void Highlight(MenuSelection selection)
     {
         Color color = selection.text.color;
 

@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class TextColorAndSizeHighlight : HighlightEffect 
 {
     [SerializeField]
-    Color color;
+#pragma warning disable 649
+	Color color;
     [SerializeField]
     int maxSize;
-    
-    public override void Highlight(MenuSelection selection)
+#pragma warning restore 649
+
+	public override void Highlight(MenuSelection selection)
     {
             selection.text.fontSize = maxSize;
             selection.text.color = color;

@@ -4,5 +4,8 @@
 public class BoolVariable : ScriptableObject
 {
     [SerializeField]
-    internal bool value;
+#pragma warning disable 649
+	internal bool value;
+#pragma warning restore 649
+
 }

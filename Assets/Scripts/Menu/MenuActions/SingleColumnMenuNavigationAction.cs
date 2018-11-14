@@ -7,11 +7,12 @@ using MenuManagement;
 public class SingleColumnMenuNavigationAction : Action
 {
     [SerializeField]
-    InputControlType upButton;
+#pragma warning disable 649
+	InputControlType upButton;
     [SerializeField]
-    InputControlType downButton;
-    
-    bool upButtonPressed = false;
+	InputControlType downButton;
+#pragma warning restore 649
+	bool upButtonPressed = false;
     bool downButtonPressed = false;
     bool selectionButtonPressed = false;
 

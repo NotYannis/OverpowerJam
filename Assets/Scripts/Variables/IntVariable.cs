@@ -4,5 +4,7 @@
 public class IntVariable : ScriptableObject
 {
     [SerializeField]
-    internal int value;
+#pragma warning disable 649
+	internal int value;
+#pragma warning restore 649
 }

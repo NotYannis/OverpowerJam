@@ -4,5 +4,7 @@
 public class FloatVariable : ScriptableObject
 {
     [SerializeField]
-    internal float value;
+#pragma warning disable 649
+	internal float value;
+#pragma warning restore 649
 }

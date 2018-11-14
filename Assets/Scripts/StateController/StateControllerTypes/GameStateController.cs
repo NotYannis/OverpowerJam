@@ -4,6 +4,7 @@ using StateControllerManagement;
 public class GameStateController : StateController
 {
     private static GameStateController _instance;
+	public GameConfig gameConfig;
     public static GameStateController Instance
     {
         get

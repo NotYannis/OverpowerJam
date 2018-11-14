@@ -4,5 +4,8 @@
 public class Vector2Variable : ScriptableObject 
 {
     [SerializeField]
-    internal Vector2 value;
+#pragma warning disable 649
+	internal Vector2 value;
+#pragma warning restore 649
+
 }
