@@ -9,3 +9,9 @@ public class ArrayElementTitleAttribute : PropertyAttribute
     }
 }
 
+public class FloatVariableAttribute : PropertyAttribute
+{
+    public FloatVariableAttribute()
+    {
+    }
+}

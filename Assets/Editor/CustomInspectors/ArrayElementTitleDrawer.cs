@@ -26,3 +26,12 @@ public class ArrayElementTitleDrawer : PropertyDrawer
         EditorGUI.PropertyField(position, property, new GUIContent(newlabel, label.tooltip), true);
     }
 }
+
+[CustomPropertyDrawer(typeof(FloatVariableAttribute))]
+public class FloatVariableDrawer : PropertyDrawer
+{
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        EditorGUI.PropertyField(position, property, label); 
+    }
+}

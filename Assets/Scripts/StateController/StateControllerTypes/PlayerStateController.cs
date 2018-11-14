@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateController : MonoBehaviour
+namespace StateControllerManagement
 {
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerStateController : StateController
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
