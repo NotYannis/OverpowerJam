@@ -53,6 +53,14 @@ public class TreeStateController : StateController
 		growthPercentage += growthPerWaterFrame;
 	}
 
+	public void Ungrow()
+	{
+		if (growthPercentage > 0)
+		{
+			growthPercentage -= GameStateController.Instance.gameConfig.ungrowRate;
+		}
+	}
+
 	public void GrowFruits()
 	{
 		for (int i = 0; i < fruits.Length; i++)

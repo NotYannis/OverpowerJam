@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 944207062}
   - component: {fileID: 944207061}
   - component: {fileID: 944207060}
+  - component: {fileID: 944207063}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -332,6 +333,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &944207063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944207059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68bbd6e27d0c2140ad7104604095b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugEnabled: 0
+  currentState: {fileID: 11400000, guid: 3af2deb421937524d9d683d5a9accf7f, type: 2}
+  prevState: {fileID: 0}
+  remainState: {fileID: 11400000, guid: 47956957cfa222a4987c03e6e2ecf239, type: 2}
+  consistentActions: []
+  anyStateTransitions: []
+  stateTimeElapsed: 0
+  numFramesElapsed: 0
+  gameConfig: {fileID: 11400000, guid: ef7fbba5b78ade0439d71b51ce2e6139, type: 2}
 --- !u!1001 &1144512812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -546,6 +568,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571229498004405465, guid: 7e5031259812a8f4b919c9a3d67c8ea8,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e5031259812a8f4b919c9a3d67c8ea8, type: 3}

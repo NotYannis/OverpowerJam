@@ -6,10 +6,10 @@ public class FloatVariableDrawer : PropertyDrawer
 {
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
-		Rect scriptableObject = new Rect(position.x, position.y, 180, position.height);
-		Rect floatValue = new Rect(position.x + 190, position.y, 100, position.height);
+		Rect scriptableObject = new Rect(position.x, position.y, 235, position.height);
+		Rect floatValue = new Rect(position.x + 239, position.y, 50, position.height);
 
-		property.objectReferenceValue = EditorGUI.ObjectField(scriptableObject, GUIContent.none, property.objectReferenceValue, typeof(FloatVariable), false);
+		property.objectReferenceValue = EditorGUI.ObjectField(scriptableObject, property.name, property.objectReferenceValue, typeof(FloatVariable), false);
 		if(property.objectReferenceValue != null)
 		{
 			SerializedObject so = new SerializedObject(property.objectReferenceValue);
