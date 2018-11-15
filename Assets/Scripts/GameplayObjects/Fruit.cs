@@ -16,6 +16,13 @@ public class Fruit : MonoBehaviour
 	    rigidbody = GetComponentInChildren<Rigidbody2D>();
 	    lastPosition = rigidbody.position.y;
 	    shadow = Instantiate(shadow, transform.position + Vector3.down * height, Quaternion.identity);
+	    if (GameStateController.Instance.gameConfig != null)
+	    {
+		    rigidbody.mass = GameStateController.Instance.gameConfig.fruitMass;
+		    rigidbody.drag = GameStateController.Instance.gameConfig.fruitLinearDrag;
+		    rigidbody.angularDrag = GameStateController.Instance.gameConfig.fruitAngularDrag;
+		    rigidbody.gravityScale = GameStateController.Instance.gameConfig.fruitGravityScale;
+	    }
     }
 
 	private void OnEnable()

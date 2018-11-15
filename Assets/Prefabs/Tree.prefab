@@ -173,7 +173,8 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: 1673de9f593a2874c96699e6ed837f92, type: 2}
   prevState: {fileID: 0}
   remainState: {fileID: 11400000, guid: 47956957cfa222a4987c03e6e2ecf239, type: 2}
-  consistentActions: []
+  consistentActions:
+  - {fileID: 11400000, guid: b887c1e6597a47345b91f5826c08cfbb, type: 2}
   anyStateTransitions: []
   stateTimeElapsed: 0
   numFramesElapsed: 0
