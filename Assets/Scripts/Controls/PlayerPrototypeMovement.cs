@@ -8,9 +8,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
     WaterSpout waterSpout;
 
     [SerializeField]
-    private float playerBaseSpeed = 8;
-
-    [SerializeField]
     PlayerLevelStats currentLevel;
 
     SpriteRenderer spriteRenderer;
@@ -31,9 +28,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
     [HideInInspector]
     public Vector2 spoutDirection;
-
-    [SerializeField]
-    float spoutOriginMinimumDistance;
 
     Vector3 playerVelocity;
 
@@ -76,7 +70,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
         leftStickDir = InputManager.ActiveDevice.LeftStick.Vector.normalized;
         mousePostion = Input.mousePosition;
 
-        playerVelocity = new Vector3(leftStickDir.x, leftStickDir.y, 0) * playerBaseSpeed / currentLevel.weight * Time.deltaTime;
+        playerVelocity = new Vector3(leftStickDir.x, leftStickDir.y, 0) * currentLevel.speed * Time.deltaTime;
 
         transform.position += playerVelocity;
 
@@ -90,7 +84,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
             spoutDirection = -(new Vector2(transform.position.x, transform.position.y) - mouse2WorldPos).normalized;
         }
 
-        spoutTransform.localPosition = spoutDirection * spoutOriginMinimumDistance;
+        spoutTransform.localPosition = spoutDirection * currentLevel.spoutOriginMinimumDistance;
         spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(spoutDirection.y, spoutDirection.x) * 180 / Mathf.PI);
 
 
