@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using InControl;
+using System.Collections;
 
 public class PlayerPrototypeMovement : MonoBehaviour
 {
-    Transform playerWeaponTransform;
+    Transform spoutTransform;
     WaterSpout waterSpout;
 
     [SerializeField]
@@ -12,16 +13,40 @@ public class PlayerPrototypeMovement : MonoBehaviour
     [SerializeField]
     PlayerLevelStats currentLevel;
 
-    Sprite sprite;
+    SpriteRenderer spriteRenderer;
     ParticleSystem.MainModule particlesMain;
     ParticleSystem.EmissionModule particlesEmission;
     ParticleSystem.VelocityOverLifetimeModule particlesVelocity;
 
+    float currentHoldTime = 0;
+    float currentKnockoutTime = 0;
+
+    Vector2 rightStickDir;
+    Vector2 leftStickDir;
+    Vector2 mousePostion;
+
+    Vector2 prevRightStickDir;
+    Vector2 prevLeftStickDir;
+    Vector2 prevMousePostion;
+
+    [HideInInspector]
+    public Vector2 spoutDirection;
+
+    [SerializeField]
+    float spoutOriginMinimumDistance;
+
+    Vector3 playerVelocity;
+
+    [SerializeField]
+    ParticleSystem knockoutParticles;
+
+    bool knockedOut;
+
     private void Awake()
     {
         waterSpout = GetComponentInChildren<WaterSpout>();
-        playerWeaponTransform = GetComponentInChildren<WaterSpout>().transform;
-        sprite = GetComponent<SpriteRenderer>().sprite;
+        spoutTransform = waterSpout.transform;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -29,6 +54,8 @@ public class PlayerPrototypeMovement : MonoBehaviour
         particlesMain = waterSpout.particleSystem.main;
         particlesEmission = waterSpout.particleSystem.emission;
         particlesVelocity = waterSpout.particleSystem.velocityOverLifetime;
+
+        prevMousePostion = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         UpgradePlayer(currentLevel);
     }
@@ -38,34 +65,76 @@ public class PlayerPrototypeMovement : MonoBehaviour
     [SerializeField]
     PlayerLevelStats level3;
 
-
     void Update()
     {
-        transform.position += new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0) * Time.deltaTime * playerBaseSpeed / currentLevel.weight;
+        if (knockedOut)
+        {
+            return;
+        }
 
+        rightStickDir = InputManager.ActiveDevice.RightStick.Vector.normalized;
+        leftStickDir = InputManager.ActiveDevice.LeftStick.Vector.normalized;
+        mousePostion = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        playerWeaponTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(InputManager.ActiveDevice.RightStick.Y, InputManager.ActiveDevice.RightStick.X) * 180 / Mathf.PI);
+        playerVelocity = new Vector3(leftStickDir.x, leftStickDir.y, 0) * playerBaseSpeed / currentLevel.weight * Time.deltaTime;
+
+        transform.position += playerVelocity;
+
+        if (rightStickDir != prevRightStickDir && rightStickDir != Vector2.zero)
+        {
+            spoutDirection = rightStickDir;
+        }
+        else if (mousePostion != prevMousePostion)
+        {
+            spoutDirection = -(new Vector2(transform.position.x, transform.position.y) - mousePostion).normalized;
+        }
+
+        spoutTransform.localPosition = spoutDirection * spoutOriginMinimumDistance;
+        spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(spoutDirection.y, spoutDirection.x) * 180 / Mathf.PI);
+
 
         if (InputManager.ActiveDevice.Action1)
         {
+            currentHoldTime += Time.deltaTime;
+            spriteRenderer.sprite = currentLevel.holdingSprite;
+
+            if (currentHoldTime > currentLevel.holdDuration)
+            {
+                knockedOut = true;
+                currentHoldTime = 0;
+                knockoutParticles.Play();
+                StartCoroutine("KnockoutTimer");
+
+                particlesMain.startSpeed = 0;
+                particlesEmission.rateOverTime = 0;
+
+                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.knockoutPushbackForce);
+                return;
+            }
+
             particlesMain.startSpeed = currentLevel.miniForce;
             particlesEmission.rateOverTime = currentLevel.miniQuantity;
 
             //Pushback
-            transform.position -= playerWeaponTransform.transform.right * Time.deltaTime * (currentLevel.miniPushback * currentLevel.miniForce);
+            transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.miniPushback * currentLevel.miniForce);
         }
         else
         {
+            currentHoldTime -= Time.deltaTime * currentLevel.holdingDecreaseSpeed;
+
+            currentHoldTime = Mathf.Max(0, currentHoldTime);
+            spriteRenderer.sprite = currentLevel.normalSprite;
+
             particlesMain.startSpeed = currentLevel.force;
-            particlesEmission.rateOverTime = currentLevel.quantity;
+            particlesEmission.rateOverTime = currentLevel.quantity + (currentHoldTime * currentLevel.extraForceRate);
 
             //Pushback
-            transform.position -= playerWeaponTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
+            transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
         }
 
-        particlesMain.startSpeed += new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).sqrMagnitude;
-        particlesVelocity.x = InputManager.ActiveDevice.LeftStick.X * playerBaseSpeed / currentLevel.weight;
-        particlesVelocity.y =  InputManager.ActiveDevice.LeftStick.Y * playerBaseSpeed / currentLevel.weight;
+        //particlesMain.startSpeed = particlesMain.startSpeed.constant + new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).magnitude * Time.deltaTime * playerBaseSpeed / currentLevel.weight;
+        //particlesVelocity.x = InputManager.ActiveDevice.LeftStick.X * playerBaseSpeed / currentLevel.weight;
+        //particlesVelocity.y =  InputManager.ActiveDevice.LeftStick.Y * playerBaseSpeed / currentLevel.weight;
 
         if (InputManager.ActiveDevice.Action2)
         {
@@ -76,16 +145,27 @@ public class PlayerPrototypeMovement : MonoBehaviour
         {
             UpgradePlayer(level3);
         }
+
+        prevRightStickDir = rightStickDir;
+        prevLeftStickDir = leftStickDir;
+        prevMousePostion = mousePostion;
+    }
+
+    private IEnumerator KnockoutTimer()
+    {
+        yield return new WaitForSeconds(currentLevel.knockoutDuration);
+
+        knockoutParticles.Stop();
+        knockedOut = false;
+        yield return null;
     }
 
     void UpgradePlayer(PlayerLevelStats levelUp)
     {
         currentLevel = levelUp;
-        sprite = currentLevel.sprite;
-
+        spriteRenderer.sprite = currentLevel.normalSprite;
 
         particlesEmission.rateOverTime = currentLevel.quantity;
         particlesMain.startSpeed = currentLevel.force;
     }
-
 }

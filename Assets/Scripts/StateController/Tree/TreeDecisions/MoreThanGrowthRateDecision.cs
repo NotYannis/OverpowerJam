@@ -1,18 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using StateControllerManagement;
 
-public class MoreThanGrowthRateDecision : MonoBehaviour
+[CreateAssetMenu(menuName = "Decisions/Tree/MoreThanGrowthRate")]
+public class MoreThanGrowthRateDecision : Decision
 {
-    // Start is called before the first frame update
-    void Start()
+#pragma warning disable 649
+	[SerializeField] private FloatVariable growthRate;
+#pragma warning restore 649
+	public override bool Decide<T>(T controller)
     {
-        
+	    return IsMoreThanGrowthRate(controller as TreeStateController);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private bool IsMoreThanGrowthRate(TreeStateController controller)
+	{
+		if (controller.growthPercentage > growthRate.value)
+		{
+			controller.growthPercentage = 0;
+			return true;
+		}
+
+		return false;
+	}
 }

@@ -12,10 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236bbfba6f76077429d8168326419654, type: 3}
   m_Name: PlayerLevel_Medium
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300004, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
-  weight: 1.5
-  force: 27
+  normalSprite: {fileID: 21300006, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
+  weight: 1
+  knockoutDuration: 3
+  knockoutPushbackForce: 100
+  force: 15
   spray: 10
   quantity: 159.68
-  holdDuration: 3.8
   pushback: 0.5
+  holdingSprite: {fileID: 21300008, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
+  holdDuration: 3.8
+  miniForce: 1.75
+  miniSpray: 80
+  miniQuantity: 12.61
+  miniPushback: 0
+  extraForceRate: 200
+  holdingDecreaseSpeed: 2
