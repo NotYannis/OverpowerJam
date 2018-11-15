@@ -5,4 +5,12 @@ using InControl;
 
 public class PlayerWeapon : MonoBehaviour
 {
+    [HideInInspector]
+    new public ParticleSystem particleSystem;
+    
+    private void Awake()
+    {
+        particleSystem = GetComponentInChildren<ParticleSystem>();
+    }
 }
+
