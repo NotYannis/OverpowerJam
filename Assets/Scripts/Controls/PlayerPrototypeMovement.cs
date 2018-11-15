@@ -74,7 +74,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
         rightStickDir = InputManager.ActiveDevice.RightStick.Vector.normalized;
         leftStickDir = InputManager.ActiveDevice.LeftStick.Vector.normalized;
-        mousePostion = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePostion = Input.mousePosition;
 
         playerVelocity = new Vector3(leftStickDir.x, leftStickDir.y, 0) * playerBaseSpeed / currentLevel.weight * Time.deltaTime;
 
@@ -86,7 +86,8 @@ public class PlayerPrototypeMovement : MonoBehaviour
         }
         else if (mousePostion != prevMousePostion)
         {
-            spoutDirection = -(new Vector2(transform.position.x, transform.position.y) - mousePostion).normalized;
+            Vector2 mouse2WorldPos = Camera.main.ScreenToWorldPoint(mousePostion);
+            spoutDirection = -(new Vector2(transform.position.x, transform.position.y) - mouse2WorldPos).normalized;
         }
 
         spoutTransform.localPosition = spoutDirection * spoutOriginMinimumDistance;
@@ -127,6 +128,15 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
             particlesMain.startSpeed = currentLevel.force;
             particlesEmission.rateOverTime = currentLevel.quantity + (currentHoldTime * currentLevel.extraForceRate);
+            if (currentHoldTime < 0.5)
+            {
+                waterSpout.GetComponentInChildren<ParticleSystem>().gameObject.layer = LayerMask.NameToLayer("SoftWater");
+            }
+            else
+            {
+
+                waterSpout.GetComponentInChildren<ParticleSystem>().gameObject.layer = LayerMask.NameToLayer("StrongWater");
+            }
 
             //Pushback
             transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
@@ -157,6 +167,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
         knockoutParticles.Stop();
         knockedOut = false;
+
         yield return null;
     }
 
