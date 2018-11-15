@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class TreeStateController : StateController
 {
@@ -15,10 +15,12 @@ public class TreeStateController : StateController
 	[SerializeField] private Fruit[] fruits;
 
 	private new SpriteRenderer renderer;
-	private int frameCount;
+	private int lastTimeWateredFrameCount;
+
 	[FormerlySerializedAs("growthPerWaterDrop")]
 	[Range(0.1f, 10f)]
 	[SerializeField] private float growthPerWaterFrame = 1f;
+
 
 	private void Awake()
 	{
@@ -39,13 +41,17 @@ public class TreeStateController : StateController
 
 	    if (isSoftlyWatered)
 	    {
-		    isSoftlyWatered = false;
+		    lastTimeWateredFrameCount = 0;
+			isSoftlyWatered = false;
 	    }
 
 	    if (isStronglyWatered)
 	    {
-		    isStronglyWatered = false;
+		    lastTimeWateredFrameCount = 0;
+			isStronglyWatered = false;
 	    }
+		if(lastTimeWateredFrameCount < int.MaxValue)
+			lastTimeWateredFrameCount++;
     }
 
 	public void Grow()
@@ -55,7 +61,7 @@ public class TreeStateController : StateController
 
 	public void Ungrow()
 	{
-		if (growthPercentage > 0)
+		if (growthPercentage > 0 && lastTimeWateredFrameCount > 10)
 		{
 			growthPercentage -= GameStateController.Instance.gameConfig.ungrowRate;
 		}

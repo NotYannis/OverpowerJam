@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137ad34a586e2a54aaf5d33de6cb09fe, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  ungrowRate: 1
+  tree: {fileID: 7957858054424707342, guid: 7e5031259812a8f4b919c9a3d67c8ea8, type: 3}
+  ungrowRate: 0.1
   babyGrowthRates: {fileID: 11400000, guid: 22946518f7877b84083cade35e3be91a, type: 2}
   bushGrowthRates: {fileID: 11400000, guid: 42effcdfb6a001541a129745dd2a6f29, type: 2}
   adultGrowthRates: {fileID: 11400000, guid: 7877186a803031540b2b4c9ab3fa07db, type: 2}
-  fruitGrowthRates: {fileID: 11400000, guid: 7877186a803031540b2b4c9ab3fa07db, type: 2}
+  fruitGrowthRates: {fileID: 11400000, guid: a897b4b7975e5724f83c3ceac34ae740, type: 2}
   fruitMass: 0.5
   fruitLinearDrag: 1
   fruitAngularDrag: 0.5

@@ -11,9 +11,6 @@ public class UngrowAction : Action
 
 	private void UngrowTree(TreeStateController controller)
 	{
-		if (!controller.isSoftlyWatered && !controller.isStronglyWatered)
-		{
-			controller.Ungrow();
-		}
+		controller.Ungrow();
 	}
 }

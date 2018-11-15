@@ -44,4 +44,9 @@ public class GameStateController : StateController
             DontDestroyOnLoad(this);
         }
     }
+
+	private void OnDestroy()
+	{
+		int floata = 0;
+	}
 }

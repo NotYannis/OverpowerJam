@@ -8,7 +8,7 @@ public class GameConfig : ScriptableObject
 {
 	public enum TreeState { Small, Medium, Big }
 
-	[Header("Trees")]
+	[Header("Trees")] public GameObject tree;
 	[Range(0f, 2f)] 
 	public float ungrowRate;
 	public FloatVariable babyGrowthRates;
