@@ -2,12 +2,16 @@
 
 public class Fruit : MonoBehaviour
 {
+
+	private LayerMask dirtLayer;
+
 	[HideInInspector] public new Rigidbody2D rigidbody;
 	[SerializeField] private GameObject shadow;
 	[SerializeField] float height;
 	public const float offset = -0.4f;
 	private Vector2 acceleration;
 	private float gravityVelocity;
+	
 
 	private bool falling;
     // Start is called before the first frame update
@@ -16,14 +20,19 @@ public class Fruit : MonoBehaviour
 	    rigidbody = GetComponentInChildren<Rigidbody2D>();
 	    lastPosition = rigidbody.position.y;
 	    shadow = Instantiate(shadow, transform.position + Vector3.down * height, Quaternion.identity);
-	    if (GameStateController.Instance.gameConfig != null)
-	    {
-		    rigidbody.mass = GameStateController.Instance.gameConfig.fruitMass;
-		    rigidbody.drag = GameStateController.Instance.gameConfig.fruitLinearDrag;
-		    rigidbody.angularDrag = GameStateController.Instance.gameConfig.fruitAngularDrag;
-		    rigidbody.gravityScale = GameStateController.Instance.gameConfig.fruitGravityScale;
-	    }
-    }
+	    dirtLayer = LayerMask.NameToLayer("Dirt");
+	}
+
+	private void Start()
+	{
+		if (GameStateController.Instance.gameConfig != null)
+		{
+			rigidbody.mass = GameStateController.Instance.gameConfig.fruitMass;
+			rigidbody.drag = GameStateController.Instance.gameConfig.fruitLinearDrag;
+			rigidbody.angularDrag = GameStateController.Instance.gameConfig.fruitAngularDrag;
+			rigidbody.gravityScale = GameStateController.Instance.gameConfig.fruitGravityScale;
+		}
+	}
 
 	private void OnEnable()
 	{
@@ -64,6 +73,12 @@ public class Fruit : MonoBehaviour
 			other.gameObject.GetComponent<Collider2D>().enabled = false;
 			rigidbody.gravityScale = 0f;
 			height = 0.5f;
+		}
+
+		if (other.gameObject.layer == dirtLayer)
+		{
+			Destroy(gameObject);
+			Instantiate(GameStateController.Instance.gameConfig.tree, other.transform.position, Quaternion.identity, other.transform);
 		}
 	}
 }

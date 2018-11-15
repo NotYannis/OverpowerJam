@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 995499120413545857}
-  - component: {fileID: 1081514370066097372}
   - component: {fileID: 2734779642836442727}
   - component: {fileID: 2613862956936375549}
   - component: {fileID: 1579485499703746061}
+  - component: {fileID: 7099475624289239076}
   m_Layer: 10
   m_Name: Fruit
   m_TagString: Untagged
@@ -34,21 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1081514370066097372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 995499120413545862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 413183a80a079a34492c8203c0c8bb55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody: {fileID: 0}
-  shadow: {fileID: 7425470380401062588, guid: 68c58ac82178bca42ad9e058b389b6d9, type: 3}
-  height: 0
 --- !u!212 &2734779642836442727
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -134,3 +119,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7099475624289239076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995499120413545862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 413183a80a079a34492c8203c0c8bb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 0}
+  shadow: {fileID: 7425470380401062588, guid: 68c58ac82178bca42ad9e058b389b6d9, type: 3}
+  tree: {fileID: 7957858054424707342, guid: 7e5031259812a8f4b919c9a3d67c8ea8, type: 3}
+  height: 0
