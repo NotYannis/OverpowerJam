@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160a131f473d09241b8931cd79a44150, type: 3}
+  m_Name: TreeBush_State
+  m_EditorClassIdentifier: 
+  enterStateActions:
+  - {fileID: 11400000, guid: 8cc7ae885e4c6ae43bda9d84006c00d1, type: 2}
+  activeStateActions:
+  - {fileID: 11400000, guid: 7dcaa124eb0569a4aa6afc6d511684c8, type: 2}
+  exitStateActions: []
+  currentAction: {fileID: 0}
+  transitions:
+  - decisions:
+    - {fileID: 11400000, guid: 4ccfb8ef9e884694e87596040de4878b, type: 2}
+    trueState: {fileID: 11400000, guid: a4753addc4024164f8de67dce53160b2, type: 2}
+    falseState: {fileID: 11400000, guid: 47956957cfa222a4987c03e6e2ecf239, type: 2}
+  sceneGizmoColor: {r: 1, g: 0.65001845, b: 0, a: 1}

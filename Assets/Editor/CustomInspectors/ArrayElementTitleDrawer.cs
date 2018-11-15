@@ -27,11 +27,11 @@ public class ArrayElementTitleDrawer : PropertyDrawer
     }
 }
 
-[CustomPropertyDrawer(typeof(FloatVariableAttribute))]
-public class FloatVariableDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        EditorGUI.PropertyField(position, property, label); 
-    }
-}
+//[CustomPropertyDrawer(typeof(FloatVariableAttribute))]
+//public class FloatVariableDrawer : PropertyDrawer
+//{
+//    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+//    {
+//        EditorGUI.PropertyField(position, property, label); 
+//    }
+//}

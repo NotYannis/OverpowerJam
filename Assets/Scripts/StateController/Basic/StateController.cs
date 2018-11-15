@@ -29,7 +29,7 @@ namespace StateControllerManagement
 
         float fixedTimeElapsed = 0;
 
-        protected void Update()
+        protected virtual void Update()
         {
             if (!isActive)
             {
