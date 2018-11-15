@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSprite: {fileID: 21300004, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
   weight: 1
-  knockoutDuration: 0
+  knockoutDuration: 3
+  knockoutPushbackForce: 100
   force: 10
   spray: 30
-  quantity: 10
+  quantity: 15
   pushback: 0.005
   holdingSprite: {fileID: 21300002, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
   holdDuration: 5
@@ -25,3 +26,5 @@ MonoBehaviour:
   miniSpray: 0
   miniQuantity: 5
   miniPushback: 0
+  extraForceRate: 100
+  holdingDecreaseSpeed: 1.4
