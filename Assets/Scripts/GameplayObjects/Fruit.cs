@@ -52,6 +52,11 @@ public class Fruit : MonoBehaviour
 	}
 
 	private float lastPosition;
+	private void Update ()
+	{
+		shadow.transform.localScale = transform.lossyScale;
+	}
+
 	private void FixedUpdate()
 	{
 		Vector3 pos = rigidbody.position;
@@ -78,6 +83,7 @@ public class Fruit : MonoBehaviour
 		if (other.gameObject.layer == dirtLayer)
 		{
 			Destroy(gameObject);
+			other.gameObject.GetComponent<Collider2D>().enabled = false;
 			Instantiate(GameStateController.Instance.gameConfig.tree, other.transform.position, Quaternion.identity, other.transform);
 		}
 	}
