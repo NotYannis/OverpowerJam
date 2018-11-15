@@ -8,15 +8,13 @@ public class PlayerPrototypeMovement : MonoBehaviour
     WaterSpout waterSpout;
 
     [SerializeField]
-    private float playerBaseSpeed = 8;
-
-    [SerializeField]
     PlayerLevelStats currentLevel;
 
     SpriteRenderer spriteRenderer;
     ParticleSystem.MainModule particlesMain;
     ParticleSystem.EmissionModule particlesEmission;
     ParticleSystem.VelocityOverLifetimeModule particlesVelocity;
+    ParticleSystem.MinMaxCurve sprayCurve;
 
     float currentHoldTime = 0;
     float currentKnockoutTime = 0;
@@ -31,9 +29,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
     [HideInInspector]
     public Vector2 spoutDirection;
-
-    [SerializeField]
-    float spoutOriginMinimumDistance;
 
     Vector3 playerVelocity;
 
@@ -54,6 +49,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
         particlesMain = waterSpout.particleSystem.main;
         particlesEmission = waterSpout.particleSystem.emission;
         particlesVelocity = waterSpout.particleSystem.velocityOverLifetime;
+        sprayCurve = particlesVelocity.y;
 
         prevMousePostion = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -64,6 +60,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
     PlayerLevelStats level2;
     [SerializeField]
     PlayerLevelStats level3;
+
 
     void Update()
     {
@@ -76,7 +73,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
         leftStickDir = InputManager.ActiveDevice.LeftStick.Vector.normalized;
         mousePostion = Input.mousePosition;
 
-        playerVelocity = new Vector3(leftStickDir.x, leftStickDir.y, 0) * playerBaseSpeed / currentLevel.weight * Time.deltaTime;
+        playerVelocity = new Vector3(leftStickDir.x, leftStickDir.y, 0) * currentLevel.speed * Time.deltaTime;
 
         transform.position += playerVelocity;
 
@@ -90,7 +87,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
             spoutDirection = -(new Vector2(transform.position.x, transform.position.y) - mouse2WorldPos).normalized;
         }
 
-        spoutTransform.localPosition = spoutDirection * spoutOriginMinimumDistance;
+        spoutTransform.localPosition = spoutDirection * currentLevel.spoutOriginMinimumDistance;
         spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(spoutDirection.y, spoutDirection.x) * 180 / Mathf.PI);
 
 
@@ -116,6 +113,9 @@ public class PlayerPrototypeMovement : MonoBehaviour
             particlesMain.startSpeed = currentLevel.miniForce;
             particlesEmission.rateOverTime = currentLevel.miniQuantity;
 
+            sprayCurve.constantMin = -currentLevel.miniSpray;
+            sprayCurve.constantMax = currentLevel.miniSpray;
+
             //Pushback
             transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.miniPushback * currentLevel.miniForce);
         }
@@ -131,20 +131,27 @@ public class PlayerPrototypeMovement : MonoBehaviour
             if (currentHoldTime < 0.5)
             {
                 waterSpout.GetComponentInChildren<ParticleSystem>().gameObject.layer = LayerMask.NameToLayer("SoftWater");
+                sprayCurve.constantMin = -currentLevel.spray;
+                sprayCurve.constantMax = currentLevel.spray;
+                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
             }
             else
             {
-
                 waterSpout.GetComponentInChildren<ParticleSystem>().gameObject.layer = LayerMask.NameToLayer("StrongWater");
+                sprayCurve.constantMin = -currentLevel.burstSpray;
+                sprayCurve.constantMax = currentLevel.burstSpray;
+                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.burstPushback * currentLevel.force);
+
             }
 
-            //Pushback
-            transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
+
         }
 
         //particlesMain.startSpeed = particlesMain.startSpeed.constant + new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).magnitude * Time.deltaTime * playerBaseSpeed / currentLevel.weight;
         //particlesVelocity.x = InputManager.ActiveDevice.LeftStick.X * playerBaseSpeed / currentLevel.weight;
         //particlesVelocity.y =  InputManager.ActiveDevice.LeftStick.Y * playerBaseSpeed / currentLevel.weight;
+
+        particlesVelocity.y = sprayCurve;
 
         if (InputManager.ActiveDevice.Action2)
         {

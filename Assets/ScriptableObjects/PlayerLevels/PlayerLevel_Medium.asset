@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: PlayerLevel_Medium
   m_EditorClassIdentifier: 
   normalSprite: {fileID: 21300006, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
-  weight: 1
+  speed: 8
   knockoutDuration: 3
   knockoutPushbackForce: 100
+  spoutOriginMinimumDistance: 1
   force: 15
   spray: 10
   quantity: 159.68
-  pushback: 0.5
+  pushback: 0.1
   holdingSprite: {fileID: 21300008, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
   holdDuration: 3.8
   miniForce: 1.75
@@ -28,3 +29,5 @@ MonoBehaviour:
   miniPushback: 0
   extraForceRate: 200
   holdingDecreaseSpeed: 2
+  burstPushback: 0.3
+  burstSpray: 3
