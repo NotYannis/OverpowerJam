@@ -23,6 +23,14 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
     Vector2 rightStickDir;
     Vector2 leftStickDir;
+    Vector2 mousePostion;
+
+    Vector2 prevRightStickDir;
+    Vector2 prevLeftStickDir;
+    Vector2 prevMousePostion;
+
+    [HideInInspector]
+    public Vector2 spoutDirection;
 
     Vector3 playerVelocity;
 
@@ -41,6 +49,8 @@ public class PlayerPrototypeMovement : MonoBehaviour
         particlesEmission = waterSpout.particleSystem.emission;
         particlesVelocity = waterSpout.particleSystem.velocityOverLifetime;
 
+        prevMousePostion = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         UpgradePlayer(currentLevel);
     }
 
@@ -58,12 +68,23 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
         rightStickDir = InputManager.ActiveDevice.RightStick.Vector.normalized;
         leftStickDir = InputManager.ActiveDevice.LeftStick.Vector.normalized;
+        mousePostion = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         playerVelocity = new Vector3(leftStickDir.x, leftStickDir.y, 0) * playerBaseSpeed / currentLevel.weight * Time.deltaTime;
 
         transform.position += playerVelocity;
 
-        spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(rightStickDir.y, rightStickDir.x) * 180 / Mathf.PI);
+        if (rightStickDir != prevRightStickDir && rightStickDir != Vector2.zero)
+        {
+            spoutDirection = rightStickDir;
+        }
+        else if (mousePostion != prevMousePostion)
+        {
+            spoutDirection = -(new Vector2(transform.position.x, transform.position.y) - mousePostion).normalized;
+        }
+
+        spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(spoutDirection.y, spoutDirection.x) * 180 / Mathf.PI);
+        
 
         if (InputManager.ActiveDevice.Action1)
         {
@@ -91,12 +112,13 @@ public class PlayerPrototypeMovement : MonoBehaviour
         }
         else
         {
-            currentHoldTime -= Time.deltaTime;
+            currentHoldTime -= Time.deltaTime * currentLevel.holdingDecreaseSpeed;
+
             currentHoldTime = Mathf.Max(0, currentHoldTime);
             spriteRenderer.sprite = currentLevel.normalSprite;
 
             particlesMain.startSpeed = currentLevel.force;
-            particlesEmission.rateOverTime = currentLevel.quantity;
+            particlesEmission.rateOverTime = currentLevel.quantity + (currentHoldTime * currentLevel.extraForceRate);
 
             //Pushback
             transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
@@ -115,6 +137,10 @@ public class PlayerPrototypeMovement : MonoBehaviour
         {
             UpgradePlayer(level3);
         }
+
+        prevRightStickDir = rightStickDir;
+        prevLeftStickDir = leftStickDir;
+        prevMousePostion = mousePostion;
     }
 
     private IEnumerator KnockoutTimer()

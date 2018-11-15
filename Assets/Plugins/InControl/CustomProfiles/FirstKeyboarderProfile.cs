@@ -39,6 +39,12 @@ namespace CustomControllerProfile
                     },
                     new InputControlMapping
                     {
+                        Handle = "Jump",
+                        Target = InputControlType.Action1,
+                        Source = KeyCodeButton (KeyCode.Mouse0)
+                    },
+                    new InputControlMapping
+                    {
                         Handle = "Dash",
                         Target = InputControlType.Action2,
                         Source = KeyCodeButton( KeyCode.Q )
@@ -82,6 +88,12 @@ namespace CustomControllerProfile
                         Handle = "Jump",
                         Target = InputControlType.Action1,
                         Source = KeyCodeButton( KeyCode.E )
+                    },
+                    new InputControlMapping
+                    {
+                        Handle = "Jump",
+                        Target = InputControlType.Action1,
+                        Source = KeyCodeButton (KeyCode.Mouse0)
                     },
                     new InputControlMapping
                     {

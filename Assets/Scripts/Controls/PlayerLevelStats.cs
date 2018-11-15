@@ -5,8 +5,10 @@ public class PlayerLevelStats : ScriptableObject
 {
     public Sprite normalSprite;
     public float weight = 1; //Slows down the player when bigger, supposedly won't be used.
+
     public float knockoutDuration;
     public float knockoutPushbackForce;
+
     [Header ("Full Blast")]
     public float force; //Power of the water jet. Effects distance water travels and force it pushes fruit
     [Range(0, 360)]
@@ -24,4 +26,7 @@ public class PlayerLevelStats : ScriptableObject
     public float miniQuantity; //The amount of water particles/second.
     [Range(0, 1)]
     public float miniPushback; //The force the player is pushed back. Always a percantage of force
+
+    public float extraForceRate;
+    public float holdingDecreaseSpeed;
 }

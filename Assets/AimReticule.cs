@@ -8,9 +8,16 @@ public class AimReticule : MonoBehaviour
     [SerializeField]
     private float distanceFromPlayer;
 
+    PlayerPrototypeMovement prototypeMovement;
+
+    private void Start()
+    {
+        prototypeMovement = GetComponentInParent<PlayerPrototypeMovement>();
+    }
+
     private void Update()
     {
-        if (new Vector3(InputManager.ActiveDevice.RightStickX, InputManager.ActiveDevice.RightStickY, 0).normalized != Vector3.zero)
-            transform.localPosition = new Vector3(InputManager.ActiveDevice.RightStickX, InputManager.ActiveDevice.RightStickY, 0).normalized * distanceFromPlayer;
+        if (new Vector3(prototypeMovement.spoutDirection.x, prototypeMovement.spoutDirection.y, 0).normalized != Vector3.zero)
+            transform.localPosition = new Vector3(prototypeMovement.spoutDirection.x, prototypeMovement.spoutDirection.y, 0).normalized * distanceFromPlayer;
     }
 }
