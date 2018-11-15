@@ -8,7 +8,11 @@ public class GameConfig : ScriptableObject
 	public enum TreeState { Small, Medium, Big }
 
 	[Header("Trees")]
-	public float[] growthRates;
+	public FloatVariable babyGrowthRates;
+	public FloatVariable bushGrowthRates;
+	public FloatVariable adultGrowthRates;
+	public FloatVariable fruitGrowthRates;
+	public FloatVariable ungrowthRate;
 
 	[Header("Player")]
 	public FloatVariable maxSpeed;

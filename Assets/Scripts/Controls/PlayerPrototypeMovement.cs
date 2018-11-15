@@ -63,7 +63,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
             transform.position -= playerWeaponTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
         }
 
-        particlesMain.startSpeed += new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).sqrMagnitude;
+        //particlesMain.startSpeed += new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).sqrMagnitude;
         particlesVelocity.x = InputManager.ActiveDevice.LeftStick.X * playerBaseSpeed / currentLevel.weight;
         particlesVelocity.y =  InputManager.ActiveDevice.LeftStick.Y * playerBaseSpeed / currentLevel.weight;
 

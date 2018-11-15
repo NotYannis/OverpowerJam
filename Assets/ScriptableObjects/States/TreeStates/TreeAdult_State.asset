@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160a131f473d09241b8931cd79a44150, type: 3}
+  m_Name: TreeAdult_State
+  m_EditorClassIdentifier: 
+  enterStateActions:
+  - {fileID: 11400000, guid: e60def7d2636cc643ad925475ba2519a, type: 2}
+  activeStateActions:
+  - {fileID: 11400000, guid: 7dcaa124eb0569a4aa6afc6d511684c8, type: 2}
+  exitStateActions: []
+  currentAction: {fileID: 0}
+  transitions:
+  - decisions:
+    - {fileID: 11400000, guid: 292c8be5e48f3784eacc8d0348bdf86c, type: 2}
+    trueState: {fileID: 11400000, guid: ea684d5d255e38041adc363c165e36af, type: 2}
+    falseState: {fileID: 11400000, guid: 47956957cfa222a4987c03e6e2ecf239, type: 2}
+  sceneGizmoColor: {r: 0.95869803, g: 1, b: 0, a: 1}
