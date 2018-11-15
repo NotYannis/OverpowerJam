@@ -52,6 +52,11 @@ public class TreeStateController : StateController
 	    }
 		if(lastTimeWateredFrameCount < int.MaxValue)
 			lastTimeWateredFrameCount++;
+
+	    if (growthPercentage >= 0)
+	    {
+		    transform.localScale = (Vector3.one * 0.5f) + Vector3.one * growthPercentage * 0.01f;
+	    }
     }
 
 	public void Grow()
