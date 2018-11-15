@@ -16,6 +16,10 @@ MonoBehaviour:
   weight: 1
   force: 10
   spray: 30
-  quantity: 100
+  quantity: 200
+  pushback: 0.005
   holdDuration: 5
-  pushback: 0.05
+  miniForce: 2
+  miniSpray: 0
+  miniQuantity: 5
+  miniPushback: 0

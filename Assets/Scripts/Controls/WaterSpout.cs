@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using InControl;
+﻿using UnityEngine;
 
-public class PlayerWeapon : MonoBehaviour
+public class WaterSpout : MonoBehaviour
 {
     [HideInInspector]
     new public ParticleSystem particleSystem;

@@ -4,24 +4,32 @@ using InControl;
 public class PlayerPrototypeMovement : MonoBehaviour
 {
     Transform playerWeaponTransform;
-    PlayerWeapon waterSpout;
-    private float speed  = 8;
+    WaterSpout waterSpout;
+
+    [SerializeField]
+    private float playerBaseSpeed = 8;
 
     [SerializeField]
     PlayerLevelStats currentLevel;
 
     Sprite sprite;
+    ParticleSystem.MainModule particlesMain;
+    ParticleSystem.EmissionModule particlesEmission;
+    ParticleSystem.VelocityOverLifetimeModule particlesVelocity;
 
     private void Awake()
     {
-        waterSpout = GetComponentInChildren<PlayerWeapon>();
-        playerWeaponTransform = GetComponentInChildren<PlayerWeapon>().transform;
+        waterSpout = GetComponentInChildren<WaterSpout>();
+        playerWeaponTransform = GetComponentInChildren<WaterSpout>().transform;
         sprite = GetComponent<SpriteRenderer>().sprite;
-
     }
 
     private void Start()
     {
+        particlesMain = waterSpout.particleSystem.main;
+        particlesEmission = waterSpout.particleSystem.emission;
+        particlesVelocity = waterSpout.particleSystem.velocityOverLifetime;
+
         UpgradePlayer(currentLevel);
     }
 
@@ -30,32 +38,34 @@ public class PlayerPrototypeMovement : MonoBehaviour
     [SerializeField]
     PlayerLevelStats level3;
 
-    
+
     void Update()
     {
-        ParticleSystem.MainModule mainParticleS = waterSpout.particleSystem.main;
+        transform.position += new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0) * Time.deltaTime * playerBaseSpeed / currentLevel.weight;
 
-        mainParticleS.startSpeed = currentLevel.force;
 
-        transform.position += Vector3.right * InputManager.ActiveDevice.LeftStick.X * Time.deltaTime * speed /currentLevel.weight;
-        transform.position += Vector3.up * InputManager.ActiveDevice.LeftStick.Y * Time.deltaTime * speed / currentLevel.weight;
-
-        
-        playerWeaponTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(InputManager.ActiveDevice.RightStick.Y, InputManager.ActiveDevice.RightStick.X) * 180 / Mathf.PI - 90);
-        transform.position -= playerWeaponTransform.transform.up * Time.deltaTime * currentLevel.pushback;
-
-        mainParticleS.startSpeed = mainParticleS.startSpeed.constant + new Vector3(InputManager.ActiveDevice.LeftStickX, InputManager.ActiveDevice.LeftStickY, 0).magnitude * Time.deltaTime * speed / currentLevel.weight;
- var emissionModule = waterSpout.particleSystem.emission;
+        playerWeaponTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(InputManager.ActiveDevice.RightStick.Y, InputManager.ActiveDevice.RightStick.X) * 180 / Mathf.PI);
 
         if (InputManager.ActiveDevice.Action1)
         {
-           
-            emissionModule.rateOverTime = 0;
+            particlesMain.startSpeed = currentLevel.miniForce;
+            particlesEmission.rateOverTime = currentLevel.miniQuantity;
+
+            //Pushback
+            transform.position -= playerWeaponTransform.transform.right * Time.deltaTime * (currentLevel.miniPushback * currentLevel.miniForce);
         }
         else
         {
-            emissionModule.rateOverTime = currentLevel.quantity;
+            particlesMain.startSpeed = currentLevel.force;
+            particlesEmission.rateOverTime = currentLevel.quantity;
+
+            //Pushback
+            transform.position -= playerWeaponTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
         }
+
+        particlesMain.startSpeed += new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).sqrMagnitude;
+        particlesVelocity.x = InputManager.ActiveDevice.LeftStick.X * playerBaseSpeed / currentLevel.weight;
+        particlesVelocity.y =  InputManager.ActiveDevice.LeftStick.Y * playerBaseSpeed / currentLevel.weight;
 
         if (InputManager.ActiveDevice.Action2)
         {
@@ -73,15 +83,9 @@ public class PlayerPrototypeMovement : MonoBehaviour
         currentLevel = levelUp;
         sprite = currentLevel.sprite;
 
-        var emissionModule = waterSpout.particleSystem.emission;
 
-        var minMaxCurve = emissionModule.rateOverTime;
-        minMaxCurve.constant = currentLevel.quantity;
-        
-      //  emissionModule.rateOverTime = currentLevel.quantity;
-
-        ParticleSystem.MainModule mainParticleS = waterSpout.particleSystem.main;
-        mainParticleS.startSpeed = currentLevel.force;
+        particlesEmission.rateOverTime = currentLevel.quantity;
+        particlesMain.startSpeed = currentLevel.force;
     }
 
 }
