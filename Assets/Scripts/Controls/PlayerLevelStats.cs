@@ -3,9 +3,10 @@
 [CreateAssetMenu (fileName = "PlayerLevel_", menuName = "Player Level Stats")]
 public class PlayerLevelStats : ScriptableObject
 {
-    public Sprite sprite;
+    public Sprite normalSprite;
     public float weight = 1; //Slows down the player when bigger, supposedly won't be used.
-
+    public float knockoutDuration;
+    public float knockoutPushbackForce;
     [Header ("Full Blast")]
     public float force; //Power of the water jet. Effects distance water travels and force it pushes fruit
     [Range(0, 360)]
@@ -14,7 +15,8 @@ public class PlayerLevelStats : ScriptableObject
     [Range(0, 1)]
     public float pushback; //The force the player is pushed back. Always a percantage of force
 
-    [Header ("Mini Blast")]
+    [Header("Mini Blast")]
+    public Sprite holdingSprite;
     public float holdDuration; //The length of time that the player can hold the water in his mouth
     public float miniForce; //Power of the water jet. Effects distance water travels and force it pushes fruit
     [Range(0, 360)]
