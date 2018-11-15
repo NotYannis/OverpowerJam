@@ -32,14 +32,20 @@ public class PlayerPrototypeMovement : MonoBehaviour
     [HideInInspector]
     public Vector2 spoutDirection;
 
+    [SerializeField]
+    float spoutOriginMinimumDistance;
+
     Vector3 playerVelocity;
+
+    [SerializeField]
+    ParticleSystem knockoutParticles;
 
     bool knockedOut;
 
     private void Awake()
     {
         waterSpout = GetComponentInChildren<WaterSpout>();
-        spoutTransform =waterSpout.transform;
+        spoutTransform = waterSpout.transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -83,8 +89,9 @@ public class PlayerPrototypeMovement : MonoBehaviour
             spoutDirection = -(new Vector2(transform.position.x, transform.position.y) - mousePostion).normalized;
         }
 
+        spoutTransform.localPosition = spoutDirection * spoutOriginMinimumDistance;
         spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(spoutDirection.y, spoutDirection.x) * 180 / Mathf.PI);
-        
+
 
         if (InputManager.ActiveDevice.Action1)
         {
@@ -95,6 +102,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
             {
                 knockedOut = true;
                 currentHoldTime = 0;
+                knockoutParticles.Play();
                 StartCoroutine("KnockoutTimer");
 
                 particlesMain.startSpeed = 0;
@@ -146,6 +154,8 @@ public class PlayerPrototypeMovement : MonoBehaviour
     private IEnumerator KnockoutTimer()
     {
         yield return new WaitForSeconds(currentLevel.knockoutDuration);
+
+        knockoutParticles.Stop();
         knockedOut = false;
         yield return null;
     }
