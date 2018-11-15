@@ -4,6 +4,16 @@
 public class PlayerLevelStats : ScriptableObject
 {
     public Sprite normalSprite;
+    public Sprite stunSprite;
+
+    public Sprite spit_back;
+    public Sprite spit_front;
+    public Sprite spit_side;
+
+    public Sprite walking_back;
+    public Sprite walking_front;
+    public Sprite walking_side;
+
     public float speed = 8; //Slows down the player when bigger, supposedly won't be used.
 
     public float knockoutDuration;

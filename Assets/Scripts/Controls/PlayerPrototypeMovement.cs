@@ -94,13 +94,31 @@ public class PlayerPrototypeMovement : MonoBehaviour
         if (InputManager.ActiveDevice.Action1)
         {
             currentHoldTime += Time.deltaTime;
-            spriteRenderer.sprite = currentLevel.holdingSprite;
+            if (spoutDirection.y > 0.7)
+            {
+                spriteRenderer.sprite = currentLevel.spit_back;
+            }
+            else if (spoutDirection.y < -0.7)
+            {
+                spriteRenderer.sprite = currentLevel.spit_front;
+            }
+            else if (spoutDirection.x < 0)
+            {
+                spriteRenderer.sprite = currentLevel.spit_side;
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.sprite = currentLevel.spit_side;
+                spriteRenderer.flipX = true;
+            }
 
             if (currentHoldTime > currentLevel.holdDuration)
             {
                 knockedOut = true;
                 currentHoldTime = 0;
                 knockoutParticles.Play();
+                spriteRenderer.sprite = currentLevel.stunSprite;
                 StartCoroutine("KnockoutTimer");
 
                 particlesMain.startSpeed = 0;
@@ -124,7 +142,26 @@ public class PlayerPrototypeMovement : MonoBehaviour
             currentHoldTime -= Time.deltaTime * currentLevel.holdingDecreaseSpeed;
 
             currentHoldTime = Mathf.Max(0, currentHoldTime);
-            spriteRenderer.sprite = currentLevel.normalSprite;
+
+            if (spoutDirection.y > 0.7)
+            {
+                spriteRenderer.sprite = currentLevel.walking_back;
+            }
+            else if (spoutDirection.y < -0.7)
+            {
+                spriteRenderer.sprite = currentLevel.walking_front;
+            }
+            else if (spoutDirection.x < 0)
+            {
+                spriteRenderer.sprite = currentLevel.walking_side;
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.sprite = currentLevel.walking_side;
+                spriteRenderer.flipX = true;
+            }
+
 
             particlesMain.startSpeed = currentLevel.force;
             particlesEmission.rateOverTime = currentLevel.quantity + (currentHoldTime * currentLevel.extraForceRate);
