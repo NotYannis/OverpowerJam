@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8396224ac1e7941b838c3f9c83d84f, type: 3}
   m_Name: Blue_TreeType
   m_EditorClassIdentifier: 
-  fruitSprite: {fileID: 0}
+  fruitSprite: {fileID: 11400000, guid: 46a2971c2b1551940bb8375624a9839c, type: 2}
   seedlingSprite: {fileID: 11400000, guid: d4055546412d01841bffae0c5eaa6ab4, type: 2}
-  bushSprite: {fileID: 0}
+  bushSprite: {fileID: 11400000, guid: 59a0d6a7bba7be04290ca1d6b3b1b7f1, type: 2}
   treeSprite: {fileID: 11400000, guid: 2df2eac88654d7a4bbc9164814b60ff9, type: 2}
