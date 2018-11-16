@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8396224ac1e7941b838c3f9c83d84f, type: 3}
-  m_Name: Red_TreeType
+  m_Name: Purple_TreeType
   m_EditorClassIdentifier: 
   fruitSprite: {fileID: 0}
   seedlingSprite: {fileID: 11400000, guid: d4055546412d01841bffae0c5eaa6ab4, type: 2}
