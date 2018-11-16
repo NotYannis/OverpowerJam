@@ -23,18 +23,25 @@ MonoBehaviour:
   speed: 8
   knockoutDuration: 3
   knockoutPushbackForce: 10
-  spoutOriginMinimumDistance: 0.3
+  spoutOriginMinimumDistance: -0.01
+  spoutYOffset: 0.15
+  spoutZOffset: 0.5
   force: 10
-  spray: 0.93
-  quantity: 15
-  pushback: 0.05
+  quantity: 300
+  lifetime: 0.5
+  particleForce: 1
+  pushback: 0.005
   holdingSprite: {fileID: 21300010, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
   holdDuration: 5
-  miniForce: 3.03
-  miniSpray: 0.1
-  miniQuantity: 5
-  miniPushback: 0
-  extraForceRate: 100
+  dripForce: 3.03
+  dripQuantity: 5
+  dripLifetime: 0.5
+  dripParticleForce: 1
+  dripPushback: 0
+  burstForce: 100
   holdingDecreaseSpeed: 1.4
+  burstQuantity: 300
+  burstLifetime: 0.5
+  burstParticleForce: 1
   burstPushback: 0.3
-  burstSpray: 3.73
+  burstSpray: 2.4
