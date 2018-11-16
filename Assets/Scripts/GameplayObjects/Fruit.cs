@@ -10,7 +10,7 @@ public class Fruit : MonoBehaviour
     [HideInInspector] public new Rigidbody2D rigidbody;
 	[SerializeField] private GameObject shadow;
 	[SerializeField] float height;
-    [HideInInspector] public SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
 	public const float offset = -0.4f;
 	private Vector2 acceleration;
