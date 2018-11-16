@@ -77,6 +77,15 @@ public class TreeStateController : StateController
         }
     }
 
+    private void LateUpdate()
+    {
+
+        if (currentLifeTimeindex == 0)
+        {
+            GetComponent<Animator>().SetBool("isWatered", false);
+        }
+    }
+
     public void Grow()
     {
         growthPercentage += growthPerWaterFrame;
@@ -125,6 +134,10 @@ public class TreeStateController : StateController
 
     private void OnParticleCollision(GameObject other)
     {
+        if (currentLifeTimeindex == 0)
+        {
+            GetComponent<Animator>().SetBool("isWatered", true);
+        }
         if (other.layer == softWaterLayer)
         {
             isSoftlyWatered = true;
