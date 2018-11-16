@@ -237,6 +237,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
             direction = direction.normalized;
 
             StartCoroutine("ApplyForce", direction * bumperBounceForce);
+            other.gameObject.GetComponent<Animator>().SetTrigger("Bumped");
         }
     }
 

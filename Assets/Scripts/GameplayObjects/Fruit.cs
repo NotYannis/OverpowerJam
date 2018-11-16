@@ -95,6 +95,7 @@ public class Fruit : MonoBehaviour
         {
             Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
             direction = direction.normalized;
+            other.gameObject.GetComponent<Animator>().SetTrigger("Bumped");
 
             rigidbody.AddForce(direction * bumperForce, ForceMode2D.Impulse);
         }
