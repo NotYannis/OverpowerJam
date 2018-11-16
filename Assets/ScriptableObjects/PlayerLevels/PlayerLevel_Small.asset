@@ -12,16 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236bbfba6f76077429d8168326419654, type: 3}
   m_Name: PlayerLevel_Small
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 21300004, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
+  normalSprite: {fileID: 21300000, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
+  stunSprite: {fileID: 21300014, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
+  spit_back: {fileID: 21300012, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
+  spit_front: {fileID: 21300008, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
+  spit_side: {fileID: 21300010, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
+  walking_back: {fileID: 21300006, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
+  walking_front: {fileID: 21300004, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
+  walking_side: {fileID: 21300002, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
   speed: 8
   knockoutDuration: 3
   knockoutPushbackForce: 100
-  spoutOriginMinimumDistance: 0.75
+  spoutOriginMinimumDistance: 0.3
   force: 10
   spray: 0.93
   quantity: 15
   pushback: 0.005
-  holdingSprite: {fileID: 21300002, guid: a079e171fc8174b429f4e389ed5d8cbc, type: 3}
+  holdingSprite: {fileID: 21300010, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
   holdDuration: 5
   miniForce: 3.03
   miniSpray: 0.1

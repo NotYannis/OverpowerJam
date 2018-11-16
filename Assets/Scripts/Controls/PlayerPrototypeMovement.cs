@@ -37,11 +37,18 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
     bool knockedOut;
 
+    [SerializeField]
+    float bumperBounceForce = 1.5f;
+
+    private new Rigidbody2D rigidbody;
+    private LayerMask bumperBushLayer;
     private void Awake()
     {
         waterSpout = GetComponentInChildren<WaterSpout>();
         spoutTransform = waterSpout.transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        bumperBushLayer = LayerMask.NameToLayer("BumperBush");
     }
 
     private void Start()
@@ -94,13 +101,31 @@ public class PlayerPrototypeMovement : MonoBehaviour
         if (InputManager.ActiveDevice.Action1)
         {
             currentHoldTime += Time.deltaTime;
-            spriteRenderer.sprite = currentLevel.holdingSprite;
+            if (spoutDirection.y > 0.7)
+            {
+                spriteRenderer.sprite = currentLevel.spit_back;
+            }
+            else if (spoutDirection.y < -0.7)
+            {
+                spriteRenderer.sprite = currentLevel.spit_front;
+            }
+            else if (spoutDirection.x < 0)
+            {
+                spriteRenderer.sprite = currentLevel.spit_side;
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.sprite = currentLevel.spit_side;
+                spriteRenderer.flipX = true;
+            }
 
             if (currentHoldTime > currentLevel.holdDuration)
             {
                 knockedOut = true;
                 currentHoldTime = 0;
                 knockoutParticles.Play();
+                spriteRenderer.sprite = currentLevel.stunSprite;
                 StartCoroutine("KnockoutTimer");
 
                 particlesMain.startSpeed = 0;
@@ -124,7 +149,26 @@ public class PlayerPrototypeMovement : MonoBehaviour
             currentHoldTime -= Time.deltaTime * currentLevel.holdingDecreaseSpeed;
 
             currentHoldTime = Mathf.Max(0, currentHoldTime);
-            spriteRenderer.sprite = currentLevel.normalSprite;
+
+            if (spoutDirection.y > 0.7)
+            {
+                spriteRenderer.sprite = currentLevel.walking_back;
+            }
+            else if (spoutDirection.y < -0.7)
+            {
+                spriteRenderer.sprite = currentLevel.walking_front;
+            }
+            else if (spoutDirection.x < 0)
+            {
+                spriteRenderer.sprite = currentLevel.walking_side;
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.sprite = currentLevel.walking_side;
+                spriteRenderer.flipX = true;
+            }
+
 
             particlesMain.startSpeed = currentLevel.force;
             particlesEmission.rateOverTime = currentLevel.quantity + (currentHoldTime * currentLevel.extraForceRate);
@@ -143,8 +187,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
                 transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.burstPushback * currentLevel.force);
 
             }
-
-
         }
 
         //particlesMain.startSpeed = particlesMain.startSpeed.constant + new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).magnitude * Time.deltaTime * playerBaseSpeed / currentLevel.weight;
@@ -185,5 +227,30 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
         particlesEmission.rateOverTime = currentLevel.quantity;
         particlesMain.startSpeed = currentLevel.force;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == bumperBushLayer)
+        {
+            Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
+            direction = direction.normalized;
+
+            StartCoroutine("ApplyForce", direction * bumperBounceForce);
+            other.gameObject.GetComponent<Animator>().SetTrigger("Bumped");
+        }
+    }
+
+    private IEnumerator ApplyForce(Vector2 force)
+    {
+        while (Vector2.SqrMagnitude(force) > 0.12f)
+        {
+            transform.position += new Vector3(force.x, force.y, 0) * Time.deltaTime;
+            force /= 1.1f; //* Time.deltaTime;//*= Vector2.one * 50 * Time.deltaTime ;
+            knockedOut = true;
+            yield return new WaitForEndOfFrame();
+        }
+        knockedOut = false;
+        yield return null;
     }
 }
