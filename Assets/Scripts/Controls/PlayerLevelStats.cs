@@ -46,7 +46,6 @@ public class PlayerLevelStats : ScriptableObject
     [FormerlySerializedAs("extraForceRate")] [Header ("Full Blast")]
     public float burstForce;
     public float holdingDecreaseSpeed;
-
 	public float burstQuantity;
 	public float burstLifetime;
 	public float burstParticleForce;

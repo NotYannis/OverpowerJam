@@ -33,9 +33,9 @@ MonoBehaviour:
   pushback: 0.005
   holdingSprite: {fileID: 21300010, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
   holdDuration: 5
-  dripForce: 3.03
+  dripForce: 6
   dripQuantity: 5
-  dripLifetime: 0.5
+  dripLifetime: 1
   dripParticleForce: 1
   dripPushback: 0
   burstForce: 100

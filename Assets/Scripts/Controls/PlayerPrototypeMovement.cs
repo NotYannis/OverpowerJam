@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using InControl;
 using System.Collections;
+using DG.Tweening;
 
 public class PlayerPrototypeMovement : MonoBehaviour
 {
@@ -11,10 +12,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
     PlayerLevelStats currentLevel;
 
     SpriteRenderer spriteRenderer;
-    //ParticleSystem.MainModule particlesMain;
-    //ParticleSystem.EmissionModule particlesEmission;
-    //ParticleSystem.VelocityOverLifetimeModule particlesVelocity;
-    //ParticleSystem.MinMaxCurve sprayCurve;
 
     float currentHoldTime = 0;
     float currentKnockoutTime = 0;
@@ -27,7 +24,12 @@ public class PlayerPrototypeMovement : MonoBehaviour
     Vector2 prevLeftStickDir;
     Vector2 prevMousePostion;
 
-    [HideInInspector]
+	ParticleSystem.MainModule normalMainModule;
+	ParticleSystem.EmissionModule normalEmissionModule;
+	ParticleSystem.VelocityOverLifetimeModule normalVelocityModule;
+	ParticleSystem.MinMaxCurve normalVelocityCurve;
+
+	[HideInInspector]
     public Vector2 spoutDirection;
 	private float spoutZOffset;
 
@@ -59,12 +61,13 @@ public class PlayerPrototypeMovement : MonoBehaviour
     {
 	    currentLevel.OnUpdate += SetupParticleSystems;
 	    SetupParticleSystems();
-        //particlesMain = waterSpout.particleSystem.main;
-        //particlesEmission = waterSpout.particleSystem.emission;
-        //particlesVelocity = waterSpout.particleSystem.velocityOverLifetime;
-        //sprayCurve = particlesVelocity.y;
 
-        prevMousePostion = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+	    normalMainModule = waterSpout.normalParticleSystem.main;
+	    normalEmissionModule = waterSpout.normalParticleSystem.emission;
+	    normalVelocityModule = waterSpout.normalParticleSystem.velocityOverLifetime;
+		normalVelocityCurve = normalVelocityModule.y;
+
+		prevMousePostion = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         UpgradePlayer(currentLevel);
     }
@@ -106,7 +109,12 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
         if (InputManager.ActiveDevice.Action1)
         {
-            currentHoldTime += Time.deltaTime;
+	        if (InputManager.ActiveDevice.Action1.WasPressed)
+	        {
+		        waterSpout.PlayDripParticles();
+		        waterSpout.StopNormalParticles();
+	        }
+			currentHoldTime += Time.deltaTime;
             if (spoutDirection.y > 0.7)
             {
                 spriteRenderer.sprite = currentLevel.spit_back;
@@ -134,27 +142,28 @@ public class PlayerPrototypeMovement : MonoBehaviour
                 currentHoldTime = 0;
                 knockoutParticles.Play();
                 spriteRenderer.sprite = currentLevel.stunSprite;
-                StartCoroutine("KnockoutTimer");
 
-                //particlesMain.startSpeed = 0;
-                //particlesEmission.rateOverTime = 0;
+	            waterSpout.StopDripParticles();
+	            PlayBurstParticles(currentHoldTime);
+
+				StartCoroutine("KnockoutTimer");
                 StartCoroutine("ApplyKOForce", new Vector2(spoutTransform.transform.right.x,spoutTransform.transform.right.y) * -(currentLevel.knockoutPushbackForce));
 
                 return;
             }
-
-            //particlesMain.startSpeed = currentLevel.miniForce;
-            //particlesEmission.rateOverTime = currentLevel.miniQuantity;
-
-            //sprayCurve.constantMin = -currentLevel.miniSpray;
-            //sprayCurve.constantMax = currentLevel.miniSpray;
 
             //Pushback
             transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.dripPushback * currentLevel.dripForce);
         }
         else
         {
-            currentHoldTime -= Time.deltaTime * currentLevel.holdingDecreaseSpeed;
+	        if (InputManager.ActiveDevice.Action1.WasReleased && !knockedOut)
+	        {
+		        waterSpout.StopDripParticles();
+		        waterSpout.PlayNormalParticles();
+		        PlayBurstParticles(currentHoldTime);
+	        }
+			currentHoldTime -= Time.deltaTime * currentLevel.holdingDecreaseSpeed;
 
             currentHoldTime = Mathf.Max(0, currentHoldTime);
 
@@ -178,21 +187,12 @@ public class PlayerPrototypeMovement : MonoBehaviour
                 spriteRenderer.sprite = currentLevel.walking_side;
                 ToRight();
             }
-			
-            //particlesMain.startSpeed = currentLevel.force;
-            //particlesEmission.rateOverTime = currentLevel.quantity + (currentHoldTime * currentLevel.extraForceRate);
             if (currentHoldTime < 0.5)
             {
-                waterSpout.GetComponentInChildren<ParticleSystem>().gameObject.layer = LayerMask.NameToLayer("SoftWater");
-                //sprayCurve.constantMin = -currentLevel.spray;
-                //sprayCurve.constantMax = currentLevel.spray;
                 transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
             }
             else
             {
-                waterSpout.GetComponentInChildren<ParticleSystem>().gameObject.layer = LayerMask.NameToLayer("StrongWater");
-                //sprayCurve.constantMin = -currentLevel.burstSpray;
-                //sprayCurve.constantMax = currentLevel.burstSpray;
                 transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.burstPushback * currentLevel.force);
 
             }
@@ -201,12 +201,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
 	    spoutTransform.localPosition = (Vector3)spoutDirection * currentLevel.spoutOriginMinimumDistance
 	                                   - Vector3.up * currentLevel.spoutYOffset + Vector3.forward * spoutZOffset;
 	    spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(spoutDirection.y, spoutDirection.x) * 180 / Mathf.PI);
-
-		//particlesMain.startSpeed = particlesMain.startSpeed.constant + new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).magnitude * Time.deltaTime * playerBaseSpeed / currentLevel.weight;
-		//particlesVelocity.x = InputManager.ActiveDevice.LeftStick.X * playerBaseSpeed / currentLevel.weight;
-		//particlesVelocity.y =  InputManager.ActiveDevice.LeftStick.Y * playerBaseSpeed / currentLevel.weight;
-
-		//particlesVelocity.y = sprayCurve;
 
 		if (InputManager.ActiveDevice.Action2)
         {
@@ -245,16 +239,35 @@ public class PlayerPrototypeMovement : MonoBehaviour
 		spoutZOffset = currentLevel.spoutZOffset;
 	}
 
+	private void PlayBurstParticles(float time)
+	{
+		float oldRate = normalEmissionModule.rateOverTimeMultiplier;
+		normalEmissionModule.rateOverTimeMultiplier = oldRate * (time + 1);
+		DOTween.To(SetBurstRate, normalEmissionModule.rateOverTimeMultiplier, oldRate, time);
+
+		float oldSpeed = normalMainModule.startSpeedMultiplier;
+		normalMainModule.startSpeedMultiplier = oldSpeed + (time + 1);
+		DOTween.To(SetBurstSpeedMultiplier, normalMainModule.startSpeedMultiplier, currentLevel.force, time);
+
+
+
+		normalVelocityCurve.constantMin = time + 1f * -currentLevel.burstSpray;
+		normalVelocityCurve.constantMax = time + 1f * currentLevel.burstSpray;
+		DOTween.To(SetBurstYMinVelocity, normalVelocityCurve.constantMin, 0f, time);
+		DOTween.To(SetBurstYMaxVelocity, normalVelocityCurve.constantMax, 0f, time);
+
+		normalVelocityModule.y = normalVelocityCurve;
+	}
+
 	private void SetupParticleSystems()
 	{
-		if (waterSpout.normalParticleSystem == null || waterSpout.dripParticleSystem == null ||
-		    waterSpout.burstParticleSystems == null) return;
+		if (waterSpout.normalParticleSystem == null || waterSpout.dripParticleSystem == null) return;
 
 		ParticleSystem.MainModule mainModule;
 		ParticleSystem.EmissionModule emissionModule;
 		ParticleSystem.CollisionModule collisionModule;
-		ParticleSystem.VelocityOverLifetimeModule velocityModule;
-		ParticleSystem.MinMaxCurve velocityCurve;
+		//ParticleSystem.VelocityOverLifetimeModule velocityModule;
+		//ParticleSystem.MinMaxCurve velocityCurve;
 
 		//Normal spray
 		mainModule = waterSpout.normalParticleSystem.main;
@@ -275,21 +288,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
 		mainModule.startLifetime = currentLevel.dripLifetime;
 		emissionModule.rateOverTimeMultiplier = currentLevel.dripQuantity;
 		collisionModule.colliderForce = currentLevel.dripForce;
-
-		//Blast spray
-		mainModule = waterSpout.blastParticleSystem.main;
-		emissionModule = waterSpout.blastParticleSystem.emission;
-		collisionModule = waterSpout.normalParticleSystem.collision;
-
-		mainModule.startSpeed = currentLevel.burstForce;
-		mainModule.startLifetime = currentLevel.burstLifetime;
-		emissionModule.rateOverTimeMultiplier = currentLevel.burstQuantity;
-		collisionModule.colliderForce = currentLevel.burstForce;
-
-		//particlesMain = waterSpout.particleSystem.main;
-		//particlesEmission = waterSpout.particleSystem.emission;
-		//particlesVelocity = waterSpout.particleSystem.velocityOverLifetime;
-		//sprayCurve = particlesVelocity.y;
 	}
 
 	private IEnumerator KnockoutTimer()
@@ -299,16 +297,13 @@ public class PlayerPrototypeMovement : MonoBehaviour
         knockoutParticles.Stop();
         knockedOut = false;
 
-        yield return null;
+		yield return null;
     }
 
     void UpgradePlayer(PlayerLevelStats levelUp)
     {
         currentLevel = levelUp;
         spriteRenderer.sprite = currentLevel.normalSprite;
-
-        //particlesEmission.rateOverTime = currentLevel.quantity;
-        //particlesMain.startSpeed = currentLevel.force;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -348,4 +343,26 @@ public class PlayerPrototypeMovement : MonoBehaviour
         }
         yield return null;
     }
+
+	private void SetBurstRate(float value)
+	{
+		normalEmissionModule.rateOverTimeMultiplier = value;
+	}
+
+	private void SetBurstSpeedMultiplier(float value)
+	{
+		normalMainModule.startSpeedMultiplier = value;
+	}
+
+	private void SetBurstYMinVelocity(float value)
+	{
+		normalVelocityCurve.constantMin = value;
+		normalVelocityModule.y = normalVelocityCurve;
+	}
+
+	private void SetBurstYMaxVelocity (float value)
+	{
+		normalVelocityCurve.constantMax = value;
+		normalVelocityModule.y = normalVelocityCurve;
+	}
 }

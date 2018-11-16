@@ -4,24 +4,22 @@ public class WaterSpout : MonoBehaviour
 {
     public ParticleSystem normalParticleSystem;
 	public ParticleSystem dripParticleSystem;
-	public ParticleSystem blastParticleSystem;
 
 	private ParticleSystem[] normalParticleSystems;
-	public ParticleSystem[] dripParticleSystems;
-	public ParticleSystem[] burstParticleSystems;
+	private ParticleSystem[] dripParticleSystems;
+	private ParticleSystem[] burstParticleSystems;
 
 	private void Start()
 	{
 		normalParticleSystems = normalParticleSystem.GetComponentsInChildren<ParticleSystem>();
 		dripParticleSystems = dripParticleSystem.GetComponentsInChildren<ParticleSystem>();
-		burstParticleSystems = blastParticleSystem.GetComponentsInChildren<ParticleSystem>();
 	}
 
 	public void PlayNormalParticles ()
 	{
 		for (int i = 0; i < normalParticleSystems.Length; i++)
 		{
-			normalParticleSystems[i].Stop();
+			normalParticleSystems[i].Play();
 		}
 	}
 
@@ -37,7 +35,7 @@ public class WaterSpout : MonoBehaviour
 	{
 		for (int i = 0; i < dripParticleSystems.Length; i++)
 		{
-			dripParticleSystems[i].Stop();
+			dripParticleSystems[i].Play();
 		}
 	}
 
@@ -53,7 +51,7 @@ public class WaterSpout : MonoBehaviour
 	{
 		for (int i = 0; i < burstParticleSystems.Length; i++)
 		{
-			burstParticleSystems[i].Stop();
+			burstParticleSystems[i].Play();
 		}
 	}
 

@@ -43,6 +43,8 @@ public class GameStateController : StateController
             _instance = Instance;
             DontDestroyOnLoad(this);
         }
+
+	    Application.targetFrameRate = 60;
     }
 
 	private void OnDestroy()

@@ -17,6 +17,7 @@ public class PlayerLevelStatsEditor : Editor
 	{
 		DrawDefaultInspector();
 		Rect scale = GUILayoutUtility.GetLastRect();
+		scale.y += scale.height + 5;
 		scale.height = 30;
 		if (GUI.Button(scale, "Update"))
 		{
