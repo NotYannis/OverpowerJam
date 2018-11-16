@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!4 &2118401020604933783 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1149804888277175732, guid: 4a55c11b090760e489224dae77c9078b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1338413467320691491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2118401020604933780 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1149804888277175735, guid: 4a55c11b090760e489224dae77c9078b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1338413467320691491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4185707372884265295 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4941227387936882971, guid: b89262407261e5c4683e400da0d76ab0,
+    type: 3}
+  m_PrefabInstance: {fileID: 9116511106987771988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4185707372884265292 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4941227387936882968, guid: b89262407261e5c4683e400da0d76ab0,
+    type: 3}
+  m_PrefabInstance: {fileID: 9116511106987771988}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &188215572
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741233582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2118401020604933783}
@@ -222,30 +246,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalParticleSystem: {fileID: 2118401020604933780}
   dripParticleSystem: {fileID: 4185707372884265292}
---- !u!4 &2118401020604933783 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1149804888277175732, guid: 4a55c11b090760e489224dae77c9078b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1338413467320691491}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2118401020604933780 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1149804888277175735, guid: 4a55c11b090760e489224dae77c9078b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1338413467320691491}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4185707372884265295 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4941227387936882971, guid: b89262407261e5c4683e400da0d76ab0,
-    type: 3}
-  m_PrefabInstance: {fileID: 9116511106987771988}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &4185707372884265292 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4941227387936882968, guid: b89262407261e5c4683e400da0d76ab0,
-    type: 3}
-  m_PrefabInstance: {fileID: 9116511106987771988}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6863199958799690149
 GameObject:
   m_ObjectHideFlags: 0

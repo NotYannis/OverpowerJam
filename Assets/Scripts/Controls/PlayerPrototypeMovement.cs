@@ -153,7 +153,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
             }
 
             //Pushback
-            transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.dripPushback * currentLevel.dripForce);
+            transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.dripPushback * currentLevel.dripSpeed);
         }
         else
         {
@@ -189,11 +189,11 @@ public class PlayerPrototypeMovement : MonoBehaviour
             }
             if (currentHoldTime < 0.5)
             {
-                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
+                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.normalPushback * currentLevel.normalSpeed);
             }
             else
             {
-                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.burstPushback * currentLevel.force);
+                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.burstPushback * currentLevel.normalSpeed);
 
             }
         }
@@ -247,7 +247,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
 		float oldSpeed = normalMainModule.startSpeedMultiplier;
 		normalMainModule.startSpeedMultiplier = oldSpeed + (time + 1);
-		DOTween.To(SetBurstSpeedMultiplier, normalMainModule.startSpeedMultiplier, currentLevel.force, time);
+		DOTween.To(SetBurstSpeedMultiplier, normalMainModule.startSpeedMultiplier, currentLevel.normalSpeed, time);
 
 
 
@@ -274,20 +274,20 @@ public class PlayerPrototypeMovement : MonoBehaviour
 		emissionModule = waterSpout.normalParticleSystem.emission;
 		collisionModule = waterSpout.normalParticleSystem.collision;
 
-		mainModule.startSpeed = currentLevel.force;
-		mainModule.startLifetime = currentLevel.lifetime;
-		emissionModule.rateOverTimeMultiplier = currentLevel.quantity;
-		collisionModule.colliderForce = currentLevel.force;
+		mainModule.startSpeed = currentLevel.normalSpeed;
+		mainModule.startLifetime = currentLevel.normalLifetime;
+		emissionModule.rateOverTimeMultiplier = currentLevel.normalQuantity;
+		collisionModule.colliderForce = currentLevel.normalSpeed;
 
 		//Drip spray
 		mainModule = waterSpout.dripParticleSystem.main;
 		emissionModule = waterSpout.dripParticleSystem.emission;
 		collisionModule = waterSpout.normalParticleSystem.collision;
 
-		mainModule.startSpeed = currentLevel.dripForce;
+		mainModule.startSpeed = currentLevel.dripSpeed;
 		mainModule.startLifetime = currentLevel.dripLifetime;
 		emissionModule.rateOverTimeMultiplier = currentLevel.dripQuantity;
-		collisionModule.colliderForce = currentLevel.dripForce;
+		collisionModule.colliderForce = currentLevel.dripSpeed;
 	}
 
 	private IEnumerator KnockoutTimer()
