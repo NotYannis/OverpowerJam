@@ -42,6 +42,7 @@ public class PlayerLevelStats : ScriptableObject
     [Header ("Full Blast")]
     public float extraForceRate;
     public float holdingDecreaseSpeed;
+    [Range(0, 1)]
     public float burstPushback = 0.3f;
     [Range(0,10)]
     public float burstSpray = 3;
