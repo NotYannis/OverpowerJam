@@ -23,7 +23,7 @@ MonoBehaviour:
   speed: 8
   knockoutDuration: 3
   knockoutPushbackForce: 100
-  spoutOriginMinimumDistance: 0.75
+  spoutOriginMinimumDistance: 0.3
   force: 10
   spray: 0.93
   quantity: 15

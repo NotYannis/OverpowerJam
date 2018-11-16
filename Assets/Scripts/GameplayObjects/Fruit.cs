@@ -4,26 +4,30 @@ public class Fruit : MonoBehaviour
 {
 
 	private LayerMask dirtLayer;
+    private LayerMask bumperBushLayer;
 
-	[HideInInspector] public new Rigidbody2D rigidbody;
+    [HideInInspector] public new Rigidbody2D rigidbody;
 	[SerializeField] private GameObject shadow;
 	[SerializeField] float height;
 	public const float offset = -0.4f;
 	private Vector2 acceleration;
 	private float gravityVelocity;
-	
+
+    [SerializeField]
+    private float bumperForce = 3;
 
 	private bool falling;
-    // Start is called before the first frame update
+
     void Awake()
     {
 	    rigidbody = GetComponentInChildren<Rigidbody2D>();
 	    lastPosition = rigidbody.position.y;
 	    shadow = Instantiate(shadow, transform.position + Vector3.down * height, Quaternion.identity);
 	    dirtLayer = LayerMask.NameToLayer("Dirt");
-	}
+        bumperBushLayer = LayerMask.NameToLayer("BumperBush");
+    }
 
-	private void Start()
+    private void Start()
 	{
 		if (GameStateController.Instance.gameConfig != null)
 		{
@@ -86,5 +90,13 @@ public class Fruit : MonoBehaviour
 			other.gameObject.GetComponent<Collider2D>().enabled = false;
 			Instantiate(GameStateController.Instance.gameConfig.tree, other.transform.position, Quaternion.identity, other.transform);
 		}
+
+        if (other.gameObject.layer == bumperBushLayer)
+        {
+            Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
+            direction = direction.normalized;
+
+            rigidbody.AddForce(direction * bumperForce, ForceMode2D.Impulse);
+        }
 	}
 }

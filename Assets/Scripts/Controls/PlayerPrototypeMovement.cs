@@ -37,11 +37,18 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
     bool knockedOut;
 
+    [SerializeField]
+    float bumperBounceForce = 1.5f;
+
+    private new Rigidbody2D rigidbody;
+    private LayerMask bumperBushLayer;
     private void Awake()
     {
         waterSpout = GetComponentInChildren<WaterSpout>();
         spoutTransform = waterSpout.transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        bumperBushLayer = LayerMask.NameToLayer("BumperBush");
     }
 
     private void Start()
@@ -180,8 +187,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
                 transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.burstPushback * currentLevel.force);
 
             }
-
-
         }
 
         //particlesMain.startSpeed = particlesMain.startSpeed.constant + new Vector3(InputManager.ActiveDevice.LeftStick.X, InputManager.ActiveDevice.LeftStick.Y, 0).magnitude * Time.deltaTime * playerBaseSpeed / currentLevel.weight;
@@ -222,5 +227,29 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
         particlesEmission.rateOverTime = currentLevel.quantity;
         particlesMain.startSpeed = currentLevel.force;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == bumperBushLayer)
+        {
+            Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
+            direction = direction.normalized;
+
+            StartCoroutine("ApplyForce", direction * bumperBounceForce);
+        }
+    }
+
+    private IEnumerator ApplyForce(Vector2 force)
+    {
+        while (Vector2.SqrMagnitude(force) > 0.12f)
+        {
+            transform.position += new Vector3(force.x, force.y, 0) * Time.deltaTime;
+            force /= 1.1f; //* Time.deltaTime;//*= Vector2.one * 50 * Time.deltaTime ;
+            knockedOut = true;
+            yield return new WaitForEndOfFrame();
+        }
+        knockedOut = false;
+        yield return null;
     }
 }
