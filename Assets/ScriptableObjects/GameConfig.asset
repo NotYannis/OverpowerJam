@@ -18,7 +18,7 @@ MonoBehaviour:
   bushGrowthRates: {fileID: 11400000, guid: 42effcdfb6a001541a129745dd2a6f29, type: 2}
   adultGrowthRates: {fileID: 11400000, guid: 7877186a803031540b2b4c9ab3fa07db, type: 2}
   fruitGrowthRates: {fileID: 11400000, guid: a897b4b7975e5724f83c3ceac34ae740, type: 2}
-  fruitMass: 0.5
+  fruitMass: 0.1
   fruitLinearDrag: 1
   fruitAngularDrag: 0.5
   fruitGravityScale: 1

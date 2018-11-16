@@ -138,8 +138,8 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
                 //particlesMain.startSpeed = 0;
                 //particlesEmission.rateOverTime = 0;
+                StartCoroutine("ApplyKOForce", new Vector2(spoutTransform.transform.right.x,spoutTransform.transform.right.y) * -(currentLevel.knockoutPushbackForce));
 
-                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.knockoutPushbackForce);
                 return;
             }
 
@@ -319,6 +319,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
             direction = direction.normalized;
 
             StartCoroutine("ApplyForce", direction * bumperBounceForce);
+            other.gameObject.GetComponent<Animator>().SetTrigger("Bumped");
         }
     }
 
@@ -332,6 +333,19 @@ public class PlayerPrototypeMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         knockedOut = false;
+        yield return null;
+    }
+
+
+    private IEnumerator ApplyKOForce(Vector2 force)
+    {
+        while (Vector2.SqrMagnitude(force) > 0.12f)
+        {
+            transform.position += new Vector3(force.x, force.y, 0) * Time.deltaTime;
+            force /= 1.1f; //* Time.deltaTime;//*= Vector2.one * 50 * Time.deltaTime ;
+
+            yield return new WaitForEndOfFrame();
+        }
         yield return null;
     }
 }
