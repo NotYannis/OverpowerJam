@@ -79,5 +79,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 4d0dedb409b33ce4ea64f7e71c010fad,
         type: 3}
+    - target: {fileID: 7957858054424707344, guid: 7e5031259812a8f4b919c9a3d67c8ea8,
+        type: 3}
+      propertyPath: bushAnimator.Array.data[0]
+      value: 
+      objectReference: {fileID: 9100000, guid: 0bacbc8e96b56b84e8d259f108e74926, type: 2}
+    - target: {fileID: 1592844319001242887, guid: 7e5031259812a8f4b919c9a3d67c8ea8,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0bacbc8e96b56b84e8d259f108e74926, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e5031259812a8f4b919c9a3d67c8ea8, type: 3}

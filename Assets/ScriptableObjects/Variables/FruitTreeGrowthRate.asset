@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd16e55289a76442a798d8827c14f55, type: 3}
   m_Name: FruitTreeGrowthRate
   m_EditorClassIdentifier: 
-  value: 200
+  value: 100
