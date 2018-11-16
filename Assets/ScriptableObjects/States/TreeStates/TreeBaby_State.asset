@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160a131f473d09241b8931cd79a44150, type: 3}
   m_Name: TreeBaby_State
   m_EditorClassIdentifier: 
-  enterStateActions:
-  - {fileID: 11400000, guid: a84dedd62f5d1bd4994df3b9816d49b1, type: 2}
+  enterStateActions: []
   activeStateActions:
   - {fileID: 11400000, guid: b72aacf52fe51154bb215a9f26326719, type: 2}
-  exitStateActions: []
+  exitStateActions:
+  - {fileID: 11400000, guid: 5e3381fc408d88148b623f6b7e2ded9b, type: 2}
   currentAction: {fileID: 11400000, guid: b72aacf52fe51154bb215a9f26326719, type: 2}
   transitions:
   - decisions:
