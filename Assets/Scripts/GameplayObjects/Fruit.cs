@@ -10,6 +10,8 @@ public class Fruit : MonoBehaviour
     [HideInInspector] public new Rigidbody2D rigidbody;
 	[SerializeField] private GameObject shadow;
 	[SerializeField] float height;
+    public SpriteRenderer spriteRenderer;
+
 	public const float offset = -0.4f;
 	private Vector2 acceleration;
 	private float gravityVelocity;
@@ -24,7 +26,9 @@ public class Fruit : MonoBehaviour
 	    rigidbody = GetComponentInChildren<Rigidbody2D>();
 	    lastPosition = rigidbody.position.y;
 	    shadow = Instantiate(shadow, transform.position + Vector3.down * height, Quaternion.identity);
-	    dirtLayer = LayerMask.NameToLayer("Dirt");
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        dirtLayer = LayerMask.NameToLayer("Dirt");
         bumperBushLayer = LayerMask.NameToLayer("BumperBush");
         flowerBushLayer = LayerMask.NameToLayer("FlowerBush");
     }
