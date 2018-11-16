@@ -125,6 +125,10 @@ public class TreeStateController : StateController
         {
             GetComponent<Animator>().runtimeAnimatorController = bushAnimator[currentLifeTimeindex];
             renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
+
+            GetComponent<CircleCollider2D>().offset += Vector2.up * 0.2f;
+            GetComponent<CircleCollider2D>().radius += 0.1f;
+
         }
         else
         {
