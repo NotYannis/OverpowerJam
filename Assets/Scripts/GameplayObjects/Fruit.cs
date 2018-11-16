@@ -145,6 +145,11 @@ public class Fruit : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
+        if (height != 0.5f)
+        {
+            return;
+        }
+
         if (perSecond)
         {
             if (other.layer == LayerMask.NameToLayer("SoftWater"))
