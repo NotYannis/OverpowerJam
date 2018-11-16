@@ -5,6 +5,7 @@ public class Fruit : MonoBehaviour
 
 	private LayerMask dirtLayer;
     private LayerMask bumperBushLayer;
+    private LayerMask flowerBushLayer;
 
     [HideInInspector] public new Rigidbody2D rigidbody;
 	[SerializeField] private GameObject shadow;
@@ -25,6 +26,7 @@ public class Fruit : MonoBehaviour
 	    shadow = Instantiate(shadow, transform.position + Vector3.down * height, Quaternion.identity);
 	    dirtLayer = LayerMask.NameToLayer("Dirt");
         bumperBushLayer = LayerMask.NameToLayer("BumperBush");
+        flowerBushLayer = LayerMask.NameToLayer("FlowerBush");
     }
 
     private void Start()
@@ -99,5 +101,25 @@ public class Fruit : MonoBehaviour
 
             rigidbody.AddForce(direction * bumperForce, ForceMode2D.Impulse);
         }
-	}
+
+        if (other.gameObject.layer == flowerBushLayer)
+        {
+            Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
+            direction = direction.normalized;
+
+            int sign = Random.value < .5 ? 1 : -1;
+            float angle = sign * 40 * Mathf.Deg2Rad;
+            float cos = Mathf.Cos(angle);
+            float sin = Mathf.Sin(angle);
+
+            float x2 = direction.x * cos - direction.y * sin;
+            float y2 = direction.x * sin + direction.y * cos;
+            direction = new Vector2(x2, y2);
+
+
+            rigidbody.AddForce(500 * direction.normalized * Time.deltaTime);
+            //rigidbody.AddForce(rigidbody.velocity.magnitude * 2 * direction.normalized);
+
+        }
+    }
 }
