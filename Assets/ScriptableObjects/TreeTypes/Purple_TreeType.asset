@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8396224ac1e7941b838c3f9c83d84f, type: 3}
-  m_Name: Red_TreeType
+  m_Name: Purple_TreeType
   m_EditorClassIdentifier: 
-  fruitSprite: {fileID: 0}
-  seedlingSprite: {fileID: 11400000, guid: d4055546412d01841bffae0c5eaa6ab4, type: 2}
-  bushSprite: {fileID: 0}
-  treeSprite: {fileID: 11400000, guid: 2df2eac88654d7a4bbc9164814b60ff9, type: 2}
+  fruitSprite: {fileID: 11400000, guid: 3909e35a60e08114a9ea75a58ff05f65, type: 2}
+  seedlingSprite: {fileID: 11400000, guid: 3131d4df23cf87e4fb78dc76daec6542, type: 2}
+  bushSprite: {fileID: 11400000, guid: f6211cc67dc21ab4ca9e056326101584, type: 2}
+  treeSprite: {fileID: 11400000, guid: d79942b993420a447a87a3fdaf67cf84, type: 2}

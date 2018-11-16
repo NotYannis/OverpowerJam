@@ -39,11 +39,18 @@ public class TreeStateController : StateController
 
         for (int i = 0; i < fruits.Length; i++)
         {
-            fruits[i].spriteRenderer.sprite = treeType.fruitSprite.value;
             fruits[i].gameObject.SetActive(false);
         }
     }
-    
+
+    private void Start()
+    {
+        for (int i = 0; i < fruits.Length; i++)
+        {
+            fruits[i].spriteRenderer.sprite = treeType.fruitSprite.value;
+        }
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -102,7 +109,14 @@ public class TreeStateController : StateController
     public void UpdateSprite(Sprite sprite)
     {
         currentLifeTimeindex++;
-        renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
+        if (lifeTimeSprites.Length > currentLifeTimeindex)
+        {
+            renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
+        }
+        else
+        {
+            renderer.sprite = lifeTimeSprites[lifeTimeSprites.Length - 1];
+        }
         //   renderer.sprite = sprite;
     }
 

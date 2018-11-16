@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ccb986a51eae347b2a3b95fd304bb4, type: 3}
   m_Name: BlueSeedlingSprite
   m_EditorClassIdentifier: 
-  value: {fileID: 21300004, guid: b22770cf7cb2dd146be084fb655aa3b2, type: 3}
+  value: {fileID: 21300000, guid: cbf02b64a2f71b8409fcba7c245dcde2, type: 3}
