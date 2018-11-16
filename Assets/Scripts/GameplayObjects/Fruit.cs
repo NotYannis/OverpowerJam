@@ -10,6 +10,8 @@ public class Fruit : MonoBehaviour
     [HideInInspector] public new Rigidbody2D rigidbody;
 	[SerializeField] private GameObject shadow;
 	[SerializeField] float height;
+    [HideInInspector] public SpriteRenderer spriteRenderer;
+
 	public const float offset = -0.4f;
 	private Vector2 acceleration;
 	private float gravityVelocity;
@@ -24,7 +26,9 @@ public class Fruit : MonoBehaviour
 	    rigidbody = GetComponentInChildren<Rigidbody2D>();
 	    lastPosition = rigidbody.position.y;
 	    shadow = Instantiate(shadow, transform.position + Vector3.down * height, Quaternion.identity);
-	    dirtLayer = LayerMask.NameToLayer("Dirt");
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        dirtLayer = LayerMask.NameToLayer("Dirt");
         bumperBushLayer = LayerMask.NameToLayer("BumperBush");
         flowerBushLayer = LayerMask.NameToLayer("FlowerBush");
     }
@@ -97,9 +101,9 @@ public class Fruit : MonoBehaviour
         {
             Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
             direction = direction.normalized;
-            other.gameObject.GetComponent<Animator>().SetTrigger("Bumped");
+            other.gameObject.GetComponent<Animator>().SetBool("Bumped",true);
 
-            rigidbody.AddForce(direction * bumperForce, ForceMode2D.Impulse);
+            rigidbody.AddForce(direction * bumperForce * Time.deltaTime, ForceMode2D.Impulse);
         }
 
         if (other.gameObject.layer == flowerBushLayer)
@@ -119,7 +123,6 @@ public class Fruit : MonoBehaviour
 
             rigidbody.AddForce(500 * direction.normalized * Time.deltaTime);
             //rigidbody.AddForce(rigidbody.velocity.magnitude * 2 * direction.normalized);
-
         }
     }
 }

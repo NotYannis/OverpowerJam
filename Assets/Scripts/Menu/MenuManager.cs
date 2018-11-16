@@ -18,7 +18,7 @@ namespace MenuManagement
 
                     if (!(_instance is MenuManager))
                     {
-                        gO = Instantiate(Resources.Load("Prefab/UI/MenuManager") as GameObject);
+                        gO = Instantiate(Resources.Load("Prefabs/MenuManager") as GameObject);
                         _instance = gO.GetComponent<MenuManager>();
                     }
                     else
