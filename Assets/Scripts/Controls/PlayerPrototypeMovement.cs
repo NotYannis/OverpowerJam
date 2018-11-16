@@ -202,16 +202,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
 	                                   - Vector3.up * currentLevel.spoutYOffset + Vector3.forward * spoutZOffset;
 	    spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(spoutDirection.y, spoutDirection.x) * 180 / Mathf.PI);
 
-		if (InputManager.ActiveDevice.Action2)
-        {
-            UpgradePlayer(level2);
-        }
-
-        if (InputManager.ActiveDevice.Action3)
-        {
-            UpgradePlayer(level3);
-        }
-
         prevRightStickDir = rightStickDir;
         prevLeftStickDir = leftStickDir;
         prevMousePostion = mousePostion;

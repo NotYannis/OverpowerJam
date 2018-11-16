@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd16e55289a76442a798d8827c14f55, type: 3}
-  m_Name: FruitTreeGrowthRate
+  m_Script: {fileID: 11500000, guid: b5e9f65be2125b548af38c60fd77e807, type: 3}
+  m_Name: PlayAnimation_Grow_Action
   m_EditorClassIdentifier: 
-  value: 100
+  animationClip: Grow
