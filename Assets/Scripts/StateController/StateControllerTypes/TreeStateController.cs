@@ -13,7 +13,7 @@ public class TreeStateController : StateController
     [HideInInspector] public bool isSoftlyWatered;
     [HideInInspector] public bool isStronglyWatered;
     [SerializeField] private Fruit[] fruits;
-
+    [SerializeField] private TreeType treeType;
     private new SpriteRenderer renderer;
     private int lastTimeWateredFrameCount;
 
@@ -21,6 +21,8 @@ public class TreeStateController : StateController
     [Range(0.1f, 10f)]
     [SerializeField] private float growthPerWaterFrame = 1f;
 
+    Sprite[] lifeTimeSprites = new Sprite[3];
+    int currentLifeTimeindex = 0;
 
     private void Awake()
     {
@@ -28,13 +30,20 @@ public class TreeStateController : StateController
         softWaterLayer = LayerMask.NameToLayer("SoftWater");
         strongWaterLayer = LayerMask.NameToLayer("StrongWater");
         renderer = GetComponent<SpriteRenderer>();
+
+        lifeTimeSprites[0] = treeType.seedlingSprite.value;
+        lifeTimeSprites[1] = treeType.bushSprite.value;
+        lifeTimeSprites[2] = treeType.treeSprite.value;
+
+        renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
+
         for (int i = 0; i < fruits.Length; i++)
         {
+            fruits[i].spriteRenderer.sprite = treeType.fruitSprite.value;
             fruits[i].gameObject.SetActive(false);
         }
     }
-
-    // Update is called once per frame
+    
     protected override void Update()
     {
         base.Update();
@@ -92,7 +101,9 @@ public class TreeStateController : StateController
 
     public void UpdateSprite(Sprite sprite)
     {
-        renderer.sprite = sprite;
+        currentLifeTimeindex++;
+        renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
+        //   renderer.sprite = sprite;
     }
 
     private void OnParticleCollision(GameObject other)
