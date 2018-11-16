@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1149804888277175732}
   - component: {fileID: 1149804888277175735}
   - component: {fileID: 1149804888277175734}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
