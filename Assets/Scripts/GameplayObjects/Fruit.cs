@@ -97,9 +97,9 @@ public class Fruit : MonoBehaviour
         {
             Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
             direction = direction.normalized;
-            other.gameObject.GetComponent<Animator>().SetTrigger("Bumped");
+            other.gameObject.GetComponent<Animator>().SetBool("Bumped",true);
 
-            rigidbody.AddForce(direction * bumperForce, ForceMode2D.Impulse);
+            rigidbody.AddForce(direction * bumperForce * Time.deltaTime, ForceMode2D.Impulse);
         }
 
         if (other.gameObject.layer == flowerBushLayer)
@@ -119,7 +119,6 @@ public class Fruit : MonoBehaviour
 
             rigidbody.AddForce(500 * direction.normalized * Time.deltaTime);
             //rigidbody.AddForce(rigidbody.velocity.magnitude * 2 * direction.normalized);
-
         }
     }
 }

@@ -60,7 +60,8 @@ namespace MenuManagement
 
             if (initialButtonComponent is ButtonProperties)
             {
-                initialButtonComponent.CopyToButtonComponent(button);
+                //Disabled because Vertical layout groups are acting weird in 2018.3b
+            //    initialButtonComponent.CopyToButtonComponent(button);
             }
         }
     }
