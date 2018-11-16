@@ -22,7 +22,7 @@ MonoBehaviour:
   walking_side: {fileID: 21300002, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
   speed: 8
   knockoutDuration: 3
-  knockoutPushbackForce: 100
+  knockoutPushbackForce: 10
   spoutOriginMinimumDistance: -0.01
   spoutYOffset: 0.15
   spoutZOffset: 0.5

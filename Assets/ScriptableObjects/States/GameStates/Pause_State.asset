@@ -12,9 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160a131f473d09241b8931cd79a44150, type: 3}
   m_Name: Pause_State
   m_EditorClassIdentifier: 
-  enterStateActions: []
-  activeStateActions: []
-  exitStateActions: []
-  currentAction: {fileID: 0}
-  transitions: []
+  enterStateActions:
+  - {fileID: 11400000, guid: efbe5ec8087ef774f928d22c961f64a8, type: 2}
+  - {fileID: 11400000, guid: 7e8951ed648c7f744bd115b16600ac80, type: 2}
+  - {fileID: 11400000, guid: ed3ca3db930e8bb4ebe4b58d5df80e5b, type: 2}
+  activeStateActions:
+  - {fileID: 11400000, guid: 57bc32ea05f165a4da70cc88019e1be5, type: 2}
+  exitStateActions:
+  - {fileID: 11400000, guid: 51e0b9d217681da4bbec8f18399ee464, type: 2}
+  currentAction: {fileID: 11400000, guid: 57bc32ea05f165a4da70cc88019e1be5, type: 2}
+  transitions:
+  - decisions:
+    - {fileID: 11400000, guid: 7f2ab3c5a7e67dc479978495d8bc161a, type: 2}
+    trueState: {fileID: 11400000, guid: 47956957cfa222a4987c03e6e2ecf239, type: 2}
+    falseState: {fileID: 11400000, guid: 3af2deb421937524d9d683d5a9accf7f, type: 2}
   sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
