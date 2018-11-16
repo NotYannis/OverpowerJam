@@ -6,9 +6,9 @@ using MenuManagement;
 [CreateAssetMenu(fileName = "MenuNavigation_Action", menuName = "Actions/Menu/Navigation")]
 public class SingleColumnMenuNavigationAction : Action
 {
-    [SerializeField]
 #pragma warning disable 649
-	InputControlType upButton;
+	[SerializeField]
+    InputControlType upButton;
     [SerializeField]
 	InputControlType downButton;
 #pragma warning restore 649
@@ -58,7 +58,7 @@ public class SingleColumnMenuNavigationAction : Action
             downButtonPressed = false;
         }
 
-        if (relevantDevice.Action1)
+        if (relevantDevice.Action1 && !Input.GetMouseButton(0))
         {
             if (!selectionButtonPressed)
             {

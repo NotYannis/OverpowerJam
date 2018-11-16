@@ -13,7 +13,6 @@ public class Fence : MonoBehaviour
     {
         if (other.collider.gameObject.layer == destructibles)
         {
-            Debug.Log("Check 2");
             Destroy(other.collider.gameObject);
         }
     }

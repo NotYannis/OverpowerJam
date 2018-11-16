@@ -20,6 +20,7 @@ public class Rock : MonoBehaviour
 
             if (transform.localScale.x < 0.01f)
             {
+                Score.Instance.IncreaseScore(100);
                 Destroy(gameObject);
             }
         }
