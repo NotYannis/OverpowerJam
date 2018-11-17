@@ -84,7 +84,6 @@ public class TreeStateController : StateController
 
     private void LateUpdate()
     {
-
         if (currentLifeTimeindex == 0)
         {
             GetComponent<Animator>().SetBool("isWatered", false);
@@ -147,6 +146,11 @@ public class TreeStateController : StateController
         if (currentLifeTimeindex == 0)
         {
             GetComponent<Animator>().SetBool("isWatered", true);
+
+            if (other.transform.position.x > transform.position.x)
+                renderer.flipX = true;
+            else
+                renderer.flipX = false;
         }
         if (other.layer == softWaterLayer)
         {
