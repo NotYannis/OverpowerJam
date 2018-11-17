@@ -124,6 +124,7 @@ public class TreeStateController : StateController
 
     public void UpdateSprite(Sprite sprite)
     {
+        shadows[currentLifeTimeindex].SetActive(false);
         currentLifeTimeindex++;
 
         if (lifeTimeSprites.Length > currentLifeTimeindex)
@@ -131,16 +132,20 @@ public class TreeStateController : StateController
             GetComponent<Animator>().runtimeAnimatorController = bushAnimator[currentLifeTimeindex];
             renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
 
+        shadows[currentLifeTimeindex].SetActive(true);
             GetComponent<CircleCollider2D>().offset += Vector2.up * 0.2f;
             GetComponent<CircleCollider2D>().radius += 0.1f;
 
         }
         else
         {
+            shadows[currentLifeTimeindex].SetActive(true);
+
             renderer.sprite = lifeTimeSprites[lifeTimeSprites.Length - 1];
         }
     }
-
+    [SerializeField]
+    GameObject[] shadows = new GameObject[3];
     private void OnParticleCollision(GameObject other)
     {
         if (currentLifeTimeindex == 0)
