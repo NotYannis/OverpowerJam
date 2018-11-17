@@ -13,6 +13,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
     [SerializeField]
     PlayerLevelStats currentLevel;
 
+    [SerializeField]
     SpriteRenderer spriteRenderer;
 
     float currentHoldTime = 0;
@@ -55,7 +56,6 @@ public class PlayerPrototypeMovement : MonoBehaviour
     {
         waterSpout = GetComponentInChildren<WaterSpout>();
         spoutTransform = waterSpout.transform;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
         bumperBushLayer = LayerMask.NameToLayer("BumperBush");
 	    mainCamera = Camera.main;

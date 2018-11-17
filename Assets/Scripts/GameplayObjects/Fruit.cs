@@ -131,11 +131,11 @@ public class Fruit : MonoBehaviour
         {
             Score.Instance.IncreaseScore(50);
 
-            Vector2 direction = rigidbody.velocity;
+            Vector2 direction = other.transform.position - transform.position;
             direction = direction.normalized;
 
             int sign = Random.value < .5 ? 1 : -1;
-            float angle = sign * 120 * Mathf.Deg2Rad;
+            float angle = sign * 130 * Mathf.Deg2Rad;
             float cos = Mathf.Cos(angle);
             float sin = Mathf.Sin(angle);
 
@@ -143,7 +143,7 @@ public class Fruit : MonoBehaviour
             float y2 = direction.x * sin + direction.y * cos;
             direction = new Vector2(x2, y2);
 
-            rigidbody.AddForce(rigidbody.velocity.magnitude * 1 * direction.normalized,ForceMode2D.Impulse);
+            rigidbody.AddForce(rigidbody.velocity.magnitude * 1 * direction.normalized, ForceMode2D.Impulse);
         }
     }
 
