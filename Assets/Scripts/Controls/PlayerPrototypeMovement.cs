@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using InControl;
 using System.Collections;
+using Cinemachine;
 using DG.Tweening;
+using UnityEditor.Rendering;
 
 public class PlayerPrototypeMovement : MonoBehaviour
 {
@@ -46,6 +48,9 @@ public class PlayerPrototypeMovement : MonoBehaviour
     private new Rigidbody2D rigidbody;
     private LayerMask bumperBushLayer;
 	private Camera mainCamera;
+	public CinemachineVirtualCamera cineCamera;
+	private CinemachineBasicMultiChannelPerlin cameraNoise;
+	private CinemachineFramingTransposer cameraBody;
     private void Awake()
     {
         waterSpout = GetComponentInChildren<WaterSpout>();
@@ -54,7 +59,12 @@ public class PlayerPrototypeMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         bumperBushLayer = LayerMask.NameToLayer("BumperBush");
 	    mainCamera = Camera.main;
-
+	    if (cineCamera != null)
+	    {
+		    cineCamera = FindObjectOfType<CinemachineVirtualCamera>();
+		    cameraNoise = cineCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+		    cameraBody = cineCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+	    }
     }
 
     private void Start()
@@ -153,7 +163,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
             }
 
             //Pushback
-            transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.dripPushback * currentLevel.dripForce);
+            transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.dripPushback * currentLevel.dripSpeed);
         }
         else
         {
@@ -189,28 +199,17 @@ public class PlayerPrototypeMovement : MonoBehaviour
             }
             if (currentHoldTime < 0.5)
             {
-                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.pushback * currentLevel.force);
+                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.normalPushback * currentLevel.normalSpeed);
             }
             else
             {
-                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.burstPushback * currentLevel.force);
-
+                transform.position -= spoutTransform.transform.right * Time.deltaTime * (currentLevel.burstPushback * currentLevel.normalSpeed);
             }
         }
 		
 	    spoutTransform.localPosition = (Vector3)spoutDirection * currentLevel.spoutOriginMinimumDistance
 	                                   - Vector3.up * currentLevel.spoutYOffset + Vector3.forward * spoutZOffset;
 	    spoutTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(spoutDirection.y, spoutDirection.x) * 180 / Mathf.PI);
-
-		if (InputManager.ActiveDevice.Action2)
-        {
-            UpgradePlayer(level2);
-        }
-
-        if (InputManager.ActiveDevice.Action3)
-        {
-            UpgradePlayer(level3);
-        }
 
         prevRightStickDir = rightStickDir;
         prevLeftStickDir = leftStickDir;
@@ -247,9 +246,7 @@ public class PlayerPrototypeMovement : MonoBehaviour
 
 		float oldSpeed = normalMainModule.startSpeedMultiplier;
 		normalMainModule.startSpeedMultiplier = oldSpeed + (time + 1);
-		DOTween.To(SetBurstSpeedMultiplier, normalMainModule.startSpeedMultiplier, currentLevel.force, time);
-
-
+		DOTween.To(SetBurstSpeedMultiplier, normalMainModule.startSpeedMultiplier, currentLevel.normalSpeed, time);
 
 		normalVelocityCurve.constantMin = time + 1f * -currentLevel.burstSpray;
 		normalVelocityCurve.constantMax = time + 1f * currentLevel.burstSpray;
@@ -257,6 +254,12 @@ public class PlayerPrototypeMovement : MonoBehaviour
 		DOTween.To(SetBurstYMaxVelocity, normalVelocityCurve.constantMax, 0f, time);
 
 		normalVelocityModule.y = normalVelocityCurve;
+
+		float percentage = time / currentLevel.holdDuration;
+		print("Hold time : " + time + ", percentage : " + percentage);
+		ShakeCamera(0.05f, 60f * percentage, time * 0.1f, time * 0.6f, time * 0.3f);
+		//MoveCameraCenter(spoutDirection, time * 0.1f, time * 0.6f, time * 0.3f);
+		//print(spoutDirection);
 	}
 
 	private void SetupParticleSystems()
@@ -274,20 +277,20 @@ public class PlayerPrototypeMovement : MonoBehaviour
 		emissionModule = waterSpout.normalParticleSystem.emission;
 		collisionModule = waterSpout.normalParticleSystem.collision;
 
-		mainModule.startSpeed = currentLevel.force;
-		mainModule.startLifetime = currentLevel.lifetime;
-		emissionModule.rateOverTimeMultiplier = currentLevel.quantity;
-		collisionModule.colliderForce = currentLevel.force;
+		mainModule.startSpeed = currentLevel.normalSpeed;
+		mainModule.startLifetime = currentLevel.normalLifetime;
+		emissionModule.rateOverTimeMultiplier = currentLevel.normalQuantity;
+		collisionModule.colliderForce = currentLevel.normalSpeed;
 
 		//Drip spray
 		mainModule = waterSpout.dripParticleSystem.main;
 		emissionModule = waterSpout.dripParticleSystem.emission;
 		collisionModule = waterSpout.normalParticleSystem.collision;
 
-		mainModule.startSpeed = currentLevel.dripForce;
+		mainModule.startSpeed = currentLevel.dripSpeed;
 		mainModule.startLifetime = currentLevel.dripLifetime;
 		emissionModule.rateOverTimeMultiplier = currentLevel.dripQuantity;
-		collisionModule.colliderForce = currentLevel.dripForce;
+		collisionModule.colliderForce = currentLevel.dripSpeed;
 	}
 
 	private IEnumerator KnockoutTimer()
@@ -344,6 +347,28 @@ public class PlayerPrototypeMovement : MonoBehaviour
         yield return null;
     }
 
+	private void ShakeCamera(float amplitude, float frequency, float inTime, float duration, float outTime)
+	{
+		if (cineCamera != null)
+		{
+			DOTween.To(SetCameraAmplitude, cameraNoise.m_AmplitudeGain, amplitude, inTime).SetEase(Ease.OutQuint);
+			DOTween.To(SetCameraFrequency, cameraNoise.m_FrequencyGain, frequency, inTime).SetEase(Ease.OutQuint);
+
+			DOTween.To(SetCameraAmplitude, cameraNoise.m_AmplitudeGain, 0f, outTime).SetEase(Ease.InQuint)
+				.SetDelay(inTime + duration);
+			DOTween.To(SetCameraFrequency, cameraNoise.m_FrequencyGain, 0f, outTime).SetEase(Ease.InQuint)
+				.SetDelay(inTime + duration);
+
+			print("inttime : " + inTime + ", outtime : " + outTime);
+		}
+	}
+
+	private void MoveCameraCenter(Vector2 direction, float inTime, float duration, float outTime)
+	{
+		DOTween.To(GetCameraCenter, SetCameraCenter, direction, inTime);
+		DOTween.To(GetCameraCenter, SetCameraCenter, Vector2.one * 0.5f, outTime).SetDelay(inTime + duration);
+	}
+
 	private void SetBurstRate(float value)
 	{
 		normalEmissionModule.rateOverTimeMultiplier = value;
@@ -364,5 +389,26 @@ public class PlayerPrototypeMovement : MonoBehaviour
 	{
 		normalVelocityCurve.constantMax = value;
 		normalVelocityModule.y = normalVelocityCurve;
+	}
+
+	private void SetCameraAmplitude(float value)
+	{
+		cameraNoise.m_AmplitudeGain = value;
+	}
+
+	private void SetCameraFrequency (float value)
+	{
+		cameraNoise.m_FrequencyGain = value;
+	}
+
+	private Vector2 GetCameraCenter()
+	{
+		return new Vector2(cameraBody.m_ScreenX, cameraBody.m_ScreenY);
+	}
+
+	private void SetCameraCenter(Vector2 value)
+	{
+		cameraBody.m_ScreenX = value.x;
+		cameraBody.m_ScreenY = value.y;
 	}
 }

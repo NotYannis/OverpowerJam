@@ -21,6 +21,8 @@ public class TreeStateController : StateController
     [Range(0.1f, 10f)]
     [SerializeField] private float growthPerWaterFrame = 1f;
 
+    [SerializeField] RuntimeAnimatorController[] bushAnimator;
+
     Sprite[] lifeTimeSprites = new Sprite[3];
     int currentLifeTimeindex = 0;
 
@@ -75,6 +77,15 @@ public class TreeStateController : StateController
         }
     }
 
+    private void LateUpdate()
+    {
+
+        if (currentLifeTimeindex == 0)
+        {
+            GetComponent<Animator>().SetBool("isWatered", false);
+        }
+    }
+
     public void Grow()
     {
         growthPercentage += growthPerWaterFrame;
@@ -109,19 +120,28 @@ public class TreeStateController : StateController
     public void UpdateSprite(Sprite sprite)
     {
         currentLifeTimeindex++;
+
         if (lifeTimeSprites.Length > currentLifeTimeindex)
         {
+            GetComponent<Animator>().runtimeAnimatorController = bushAnimator[currentLifeTimeindex];
             renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
+
+            GetComponent<CircleCollider2D>().offset += Vector2.up * 0.2f;
+            GetComponent<CircleCollider2D>().radius += 0.1f;
+
         }
         else
         {
             renderer.sprite = lifeTimeSprites[lifeTimeSprites.Length - 1];
         }
-        //   renderer.sprite = sprite;
     }
 
     private void OnParticleCollision(GameObject other)
     {
+        if (currentLifeTimeindex == 0)
+        {
+            GetComponent<Animator>().SetBool("isWatered", true);
+        }
         if (other.layer == softWaterLayer)
         {
             isSoftlyWatered = true;

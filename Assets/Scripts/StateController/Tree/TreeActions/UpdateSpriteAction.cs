@@ -12,6 +12,6 @@ public class UpdateSpriteAction : Action
 
 	private void UpdateSprite(TreeStateController controller)
 	{
-		controller.UpdateSprite(sprite.value);
+		//controller.UpdateSprite(sprite.value);
 	}
 }
