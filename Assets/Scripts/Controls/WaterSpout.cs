@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using FMOD.Studio;
+using FMODUnity;
+using UnityEngine;
 
 public class WaterSpout : MonoBehaviour
 {
@@ -9,10 +11,21 @@ public class WaterSpout : MonoBehaviour
 	private ParticleSystem[] dripParticleSystems;
 	private ParticleSystem[] burstParticleSystems;
 
+	private EventInstance jetSound;
+	private EventInstance music;
+
 	private void Start()
 	{
 		normalParticleSystems = normalParticleSystem.GetComponentsInChildren<ParticleSystem>();
 		dripParticleSystems = dripParticleSystem.GetComponentsInChildren<ParticleSystem>();
+
+		jetSound = RuntimeManager.CreateInstance("event:/Spray/Jet");
+		//jetSound.start();
+		jetSound.setParameterValue("Spray", 1f);
+
+		music = RuntimeManager.CreateInstance("event:/Music");
+		//music.start();
+		music.setParameterValue("Spray", 1f);
 	}
 
 	public void PlayNormalParticles ()
@@ -21,6 +34,8 @@ public class WaterSpout : MonoBehaviour
 		{
 			normalParticleSystems[i].Play();
 		}
+		jetSound.setParameterValue("Spray", 1f);
+		music.setParameterValue("Spray", 1f);
 	}
 
 	public void StopNormalParticles()
@@ -37,6 +52,9 @@ public class WaterSpout : MonoBehaviour
 		{
 			dripParticleSystems[i].Play();
 		}
+
+		jetSound.setParameterValue("Spray", 0f);
+		music.setParameterValue("Spray", 0f);
 	}
 
 	public void StopDripParticles ()
@@ -61,6 +79,13 @@ public class WaterSpout : MonoBehaviour
 		{
 			burstParticleSystems[i].Stop();
 		}
+	}
+
+	public void StopJet()
+	{
+		StopDripParticles();
+		StopNormalParticles();
+		jetSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 	}
 }
 

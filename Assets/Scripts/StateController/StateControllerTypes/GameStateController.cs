@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FMODUnity;
+using UnityEngine;
 using StateControllerManagement;
 
 public class GameStateController : StateController
@@ -45,7 +46,7 @@ public class GameStateController : StateController
         }
 
 	    Application.targetFrameRate = 60;
-    }
+	}
 
 	private void OnDestroy()
 	{

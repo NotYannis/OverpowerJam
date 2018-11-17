@@ -26,19 +26,19 @@ MonoBehaviour:
   spoutOriginMinimumDistance: -0.01
   spoutYOffset: 0.15
   spoutZOffset: 0.5
-  force: 10
-  quantity: 300
-  lifetime: 0.5
-  particleForce: 1
-  pushback: 0.005
+  normalSpeed: 10
+  normalQuantity: 300
+  normalLifetime: 0.5
+  normalParticleForce: 1
+  normalPushback: 0.005
   holdingSprite: {fileID: 21300010, guid: cef7129d3b2a5bc46a2bceb4f4ed5752, type: 3}
   holdDuration: 5
-  dripForce: 6
-  dripQuantity: 5
+  dripSpeed: 6
+  dripQuantity: 30
   dripLifetime: 1
   dripParticleForce: 1
   dripPushback: 0
-  burstForce: 100
+  burstSpeed: 100
   holdingDecreaseSpeed: 1.4
   burstQuantity: 300
   burstLifetime: 0.5

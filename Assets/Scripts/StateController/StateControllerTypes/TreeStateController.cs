@@ -1,4 +1,8 @@
-﻿using StateControllerManagement;
+﻿using DG.Tweening;
+using FMOD;
+using FMOD.Studio;
+using FMODUnity;
+using StateControllerManagement;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -22,9 +26,25 @@ public class TreeStateController : StateController
     [SerializeField] private float growthPerWaterFrame = 1f;
 
     [SerializeField] RuntimeAnimatorController[] bushAnimator;
+	private Animator animator;
 
     Sprite[] lifeTimeSprites = new Sprite[3];
     int currentLifeTimeindex = 0;
+
+	private EventInstance treeSound;
+
+	private string[] growEvents = new[] {"event:/Trees/Seed_grow", "event:/Trees/Bush_grow", "event:/Trees/Tree_grow"};
+
+	private bool isWateredSoundStopped
+	{
+		get
+		{
+			
+			PLAYBACK_STATE state;
+			treeSound.getPlaybackState(out state);
+			return state == PLAYBACK_STATE.STOPPED;
+		}
+	}
 
     private void Awake()
     {
@@ -32,9 +52,9 @@ public class TreeStateController : StateController
         softWaterLayer = LayerMask.NameToLayer("SoftWater");
         strongWaterLayer = LayerMask.NameToLayer("StrongWater");
         renderer = GetComponent<SpriteRenderer>();
+	    animator = GetComponent<Animator>();
 
-
-        lifeTimeSprites[0] = treeType.seedlingSprite.value;
+		lifeTimeSprites[0] = treeType.seedlingSprite.value;
         lifeTimeSprites[1] = treeType.bushSprite.value;
         lifeTimeSprites[2] = treeType.treeSprite.value;
 
@@ -45,9 +65,11 @@ public class TreeStateController : StateController
             fruits[i].gameObject.SetActive(false);
             fruits[i].treeType = treeType;
         }
+		treeSound = RuntimeManager.CreateInstance("event:/Water_hit");
+	    treeSound.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject.transform));
     }
 
-    private void Start()
+	private void Start()
     {
         for (int i = 0; i < fruits.Length; i++)
         {
@@ -56,6 +78,7 @@ public class TreeStateController : StateController
         bushAnimator[0] = treeType.controller;
         GetComponent<Animator>().runtimeAnimatorController = treeType.controller;
         renderer.sprite = treeType.seedlingSprite.value;
+	    PlayGrowSound();
     }
 
     protected override void Update()
@@ -93,6 +116,10 @@ public class TreeStateController : StateController
     public void Grow()
     {
         growthPercentage += growthPerWaterFrame;
+	    if (isWateredSoundStopped)
+	    {
+		    treeSound.start();
+	    }
     }
 
     public void Ungrow()
@@ -100,6 +127,10 @@ public class TreeStateController : StateController
         if (growthPercentage > 0 && lastTimeWateredFrameCount > 10)
         {
             growthPercentage -= GameStateController.Instance.gameConfig.ungrowRate;
+	        if (!isWateredSoundStopped)
+	        {
+		        treeSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+	        }
         }
     }
 
@@ -144,28 +175,38 @@ public class TreeStateController : StateController
             renderer.sprite = lifeTimeSprites[lifeTimeSprites.Length - 1];
         }
     }
+
+	public void PlayGrowSound()
+	{
+		RuntimeManager.PlayOneShotAttached(growEvents[currentLifeTimeindex], gameObject);
+	}
+
     [SerializeField]
     GameObject[] shadows = new GameObject[3];
     private void OnParticleCollision(GameObject other)
     {
-        if (currentLifeTimeindex == 0)
-        {
-            GetComponent<Animator>().SetBool("isWatered", true);
-
-            if (other.transform.position.x > transform.position.x)
-                renderer.flipX = true;
-            else
-                renderer.flipX = false;
-        }
         if (other.layer == softWaterLayer)
         {
             isSoftlyWatered = true;
-        }
+	        if (currentLifeTimeindex == 0)
+	        {
+		        animator.SetBool("isWatered", true);
+
+		        if (other.transform.position.x > transform.position.x)
+			        renderer.flipX = true;
+		        else
+			        renderer.flipX = false;
+	        }
+		}
 
         if (other.layer == strongWaterLayer)
         {
             isStronglyWatered = true;
-        }
+	        if (currentLifeTimeindex == 0)
+	        {
+		        animator.SetBool("isWatered", false);
+	        }
+		}
     }
 }
 
