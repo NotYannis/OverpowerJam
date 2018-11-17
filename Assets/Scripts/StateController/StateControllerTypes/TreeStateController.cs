@@ -39,7 +39,6 @@ public class TreeStateController : StateController
 	{
 		get
 		{
-			
 			PLAYBACK_STATE state;
 			treeSound.getPlaybackState(out state);
 			return state == PLAYBACK_STATE.STOPPED;

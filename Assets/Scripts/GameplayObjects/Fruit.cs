@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using FMODUnity;
 using UnityEngine;
 
 public class Fruit : MonoBehaviour
@@ -36,9 +37,9 @@ public class Fruit : MonoBehaviour
         dirtLayer = LayerMask.NameToLayer("Dirt");
         bumperBushLayer = LayerMask.NameToLayer("BumperBush");
         flowerBushLayer = LayerMask.NameToLayer("FlowerBush");
-    }
+	}
 
-    private void Start()
+	private void Start()
     {
         if (GameStateController.Instance.gameConfig != null)
         {
@@ -52,9 +53,10 @@ public class Fruit : MonoBehaviour
     private void OnEnable()
     {
         shadow.SetActive(true);
-    }
+	    RuntimeManager.PlayOneShotAttached("event:/Trees/Fruit_grow", gameObject);
+	}
 
-    private void OnDisable()
+	private void OnDisable()
     {
         if (shadow != null)
             shadow.SetActive(false);
@@ -99,13 +101,14 @@ public class Fruit : MonoBehaviour
     {
         if (other.gameObject == shadow)
         {
+	        RuntimeManager.PlayOneShotAttached("event:/Trees/Fruit_fall", gameObject);
             falling = false;
             other.gameObject.GetComponent<Collider2D>().enabled = false;
             rigidbody.gravityScale = 0f;
             height = 0.5f;
-        }
+		}
 
-        if (other.gameObject.layer == dirtLayer)
+		if (other.gameObject.layer == dirtLayer)
         {
             Score.Instance.IncreaseScore(1000);
             Destroy(gameObject);

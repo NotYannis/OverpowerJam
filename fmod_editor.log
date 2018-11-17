@@ -1,0 +1,90 @@
+[LOG] System::create                           : Header version = 1.10.09. Current version = 1.10.09.
+[LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
+[LOG] SystemI::init                            : Initialize version=11009 (97915), maxchannels=256, flags=0x00020000
+[LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncManager::init                       : manager 000000003EFB4CA8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : done
+[LOG] PlaybackSystem::init                     : 
+[LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] PlaybackSystem::init                     : done
+[LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] Manager::init                            : done.
+[LOG] SoundI::release                          :  (00000000A784A078)
+[LOG] SoundI::release                          :     SeedPlop (000000004C2E2558)
+[LOG] SoundI::release                          :  (000000008D7E6668)
+[LOG] SoundI::release                          :     Seed_grow (00000000B34DBBA8)
+[LOG] SoundI::release                          :  (000000008DFB28D8)
+[LOG] SoundI::release                          :     Fruit_pousse_1 (00000000B34E11C8)
+[LOG] SoundI::release                          :  (000000008DFB2318)
+[LOG] SoundI::release                          :     Fruit_pousse_2 (00000000B34DFCA8)
+[LOG] SoundI::release                          :  (000000008DFB2768)
+[LOG] SoundI::release                          :     Fruit_pousse_3 (00000000B34DCA48)
+[LOG] SoundI::release                          :  (000000008DFB2038)
+[LOG] SoundI::release                          :     Fruit_pousse_4 (00000000B34E09A8)
+[LOG] SoundI::release                          :  (000000008DFB2A48)
+[LOG] SoundI::release                          :     Fruit_pousse_5 (00000000B34E04C8)
+[LOG] SoundI::release                          :  (000000008DFB21A8)
+[LOG] SoundI::release                          :     Fruit_pousse_6 (00000000B34E19E8)
+[LOG] SoundI::release                          :  (000000008DFB1EC8)
+[LOG] SoundI::release                          :     Fruit_pousse_7 (00000000B34DDA88)
+[LOG] SoundI::release                          :  (000000008D7E6AB8)
+[LOG] SoundI::release                          :     Spray_Bubbles_01 (00000000B34E1368)
+[LOG] SoundI::release                          :  (00000000A784AA88)
+[LOG] SoundI::release                          :     Spray_Bubbles_02 (000000004C2E0338)
+[LOG] SoundI::release                          :  (000000009A474978)
+[LOG] SoundI::release                          :     Spray_Bubbles_03 (000000004C2DF498)
+[LOG] SoundI::release                          :  (000000008D7E6218)
+[LOG] SoundI::release                          :     Spray_Bubbles_04 (00000000B34DBEE8)
+[LOG] SoundI::release                          :  (000000008D7E6388)
+[LOG] SoundI::release                          :     Spray_Bubbles_05 (00000000B34E1848)
+[LOG] SoundI::release                          :  (000000008D7E6948)
+[LOG] SoundI::release                          :     Spray_Bubbles_06 (00000000B34E0B48)
+[LOG] SoundI::release                          :  (000000008D7E60A8)
+[LOG] SoundI::release                          :     Spray_Bubbles_07 (00000000B34DCF28)
+[LOG] SoundI::release                          :  (000000008D7E64F8)
+[LOG] SoundI::release                          :     Spray_Bubbles_08 (00000000B34E0CE8)
+[LOG] SoundI::release                          :  (000000008D7E6C28)
+[LOG] SoundI::release                          :     Spray_waves_01 (00000000B34DD268)
+[LOG] SoundI::release                          :  (000000009A4743B8)
+[LOG] SoundI::release                          :     Spray_waves_02 (000000004C2DFFF8)
+[LOG] SoundI::release                          :  (000000008D7E6D98)
+[LOG] SoundI::release                          :     Spray_waves_03 (00000000B34DC088)
+[LOG] SoundI::release                          :  (00000000A784A4C8)
+[LOG] SoundI::release                          :     Spray_waves_04 (000000004C2DF158)
+[LOG] SoundI::release                          :  (000000009A474528)
+[LOG] SoundI::release                          :     Spray_waves_05 (000000004C2E11D8)
+[LOG] SoundI::release                          :  (000000008D7E67D8)
+[LOG] SoundI::release                          :     Spray_waves_06 (00000000B34DE788)
+[LOG] SoundI::release                          :  (00000000A784ABF8)
+[LOG] SoundI::release                          :     Spray_waves_07 (000000004C2E1B98)
+[LOG] SoundI::release                          :  (000000009A474698)
+[LOG] SoundI::release                          :     Spray_gargle (000000004C2E23B8)
+[LOG] SoundI::release                          :  (00000000A784A358)
+[LOG] SoundI::release                          :     Spray_hi_Start_01 (000000004C2DFE58)
+[LOG] SoundI::release                          :  (000000009A474248)
+[LOG] SoundI::release                          :     Spray_Start_02 (000000004C2E2218)
+[LOG] SoundI::release                          :  (000000009A474808)
+[LOG] SoundI::release                          :     Spray_hi_Start_03 (00000000B34DD0C8)
+[LOG] SoundI::release                          :  (000000009A474AE8)
+[LOG] SoundI::release                          :     Spray_Start_04 (00000000B34DEC68)
+[LOG] SoundI::release                          :  (000000009A474C58)
+[LOG] SoundI::release                          :     Spray_Start_hit_01 (000000004C2DEFB8)
+[LOG] SoundI::release                          :  (000000009A4740D8)
+[LOG] SoundI::release                          :     Spray_Start_hit_03 (000000004C2E16B8)
+[LOG] SoundI::release                          :  (000000009A474DC8)
+[LOG] SoundI::release                          :     Spray_Start_hit_02 (000000004C2E0E98)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.

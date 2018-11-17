@@ -2529,6 +2529,21 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 4185707372884265292, guid: 486371cf3c3bfc54ba69f934ea8e6cda,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185707372884265292, guid: 486371cf3c3bfc54ba69f934ea8e6cda,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185707372884265292, guid: 486371cf3c3bfc54ba69f934ea8e6cda,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.y
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 486371cf3c3bfc54ba69f934ea8e6cda, type: 3}
 --- !u!1 &1786806860
