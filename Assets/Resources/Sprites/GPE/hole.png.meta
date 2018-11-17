@@ -1,14 +1,11 @@
 fileFormatVersion: 2
-guid: b22770cf7cb2dd146be084fb655aa3b2
+guid: 54336aacaaa4c0c41aa9f6d80f3ddf64
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_0
-    21300002: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_1
-    21300004: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_2
-    21300006: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_3
-    21300008: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_4
-    21300010: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_5
-    21300012: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_6
+    21300000: soil_0
+    21300002: soil_1
+    21300004: soil_2
+    21300006: soil_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -38,7 +35,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -47,12 +44,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +67,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -81,7 +78,29 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -92,7 +111,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -102,33 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_0
+      name: soil_0
       rect:
         serializedVersion: 2
-        x: 284
-        y: 26
-        width: 144
-        height: 164
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 24a11c7bbb9826441aca49b49a14315b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_1
-      rect:
-        serializedVersion: 2
-        x: 185
-        y: 28
-        width: 100
-        height: 144
+        x: 0
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,19 +135,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd585807c8cd4b146919ae9e45ee9e08
+      spriteID: cd037638cd356be45ad2dd99a3ddf82c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_2
+      name: soil_1
       rect:
         serializedVersion: 2
-        x: 46
-        y: 205
-        width: 71
-        height: 69
+        x: 16
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,19 +155,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56234567a8dc8f14d924bbef0cb4f613
+      spriteID: 607e5f5454a8a664b9a857e9016cb782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_3
+      name: soil_2
       rect:
         serializedVersion: 2
-        x: 111
-        y: 263
-        width: 103
-        height: 89
+        x: 0
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,19 +175,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d1e7a63d493e2f40be179915f64d9a1
+      spriteID: 45dab288575e8234faefa92bf98f8e4a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_4
+      name: soil_3
       rect:
         serializedVersion: 2
-        x: 197
-        y: 178
-        width: 83
-        height: 71
+        x: 16
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,47 +195,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75548465d046104438b78766f741074b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_5
-      rect:
-        serializedVersion: 2
-        x: 273
-        y: 227
-        width: 128
-        height: 129
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f93399831777bc8419b59af35388a369
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 53220221-doodle-children-s-drawing-with-happy-girl-house-tree-clouds-and-sun_6
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 23
-        width: 166
-        height: 186
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 229a9b46fcbff8346b680cce8aa4fcec
+      spriteID: a9a71025f08e29b429c8ab92a06e94f4
       vertices: []
       indices: 
       edges: []
@@ -244,7 +203,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c9628b522f4cfd049833be5a89b9f69b
+    spriteID: f6f02a0cb01dbb441af3eeeb1ad7fdb9
     vertices: []
     indices: 
     edges: []

@@ -526,14 +526,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7490196}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 16fe9ffc4a52cb341a1c2eb9a4e7d26a, type: 3}
+  m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatePrev: 1
-  highlight: {fileID: 0}
+  highlight: {fileID: 11400000, guid: 70f344a66948de9449f7589ea2a93eb0, type: 2}
 --- !u!1 &1573204437010196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatePrev: 1
-  highlight: {fileID: 0}
+  highlight: {fileID: 11400000, guid: dfc80c0f00782d2448310b36de49199c, type: 2}
 --- !u!1 &1797221723145132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deactivatePrev: 1
-  highlight: {fileID: 0}
+  highlight: {fileID: 11400000, guid: dfc80c0f00782d2448310b36de49199c, type: 2}
 --- !u!1 &3644781260625723324
 GameObject:
   m_ObjectHideFlags: 0

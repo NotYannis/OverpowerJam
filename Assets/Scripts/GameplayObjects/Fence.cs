@@ -14,6 +14,7 @@ public class Fence : MonoBehaviour
         if (other.collider.gameObject.layer == destructibles)
         {
             Destroy(other.collider.gameObject);
+            Score.Instance.IncreaseScore(-200);
         }
     }
 }

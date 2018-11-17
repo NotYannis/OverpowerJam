@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8396224ac1e7941b838c3f9c83d84f, type: 3}
   m_Name: Blue_TreeType
   m_EditorClassIdentifier: 
+  prefabVariant: {fileID: 1727342244556285265, guid: 8d5b66768b2d3634599ba85db5d52961,
+    type: 3}
   fruitSprite: {fileID: 11400000, guid: 46a2971c2b1551940bb8375624a9839c, type: 2}
   seedlingSprite: {fileID: 11400000, guid: d4055546412d01841bffae0c5eaa6ab4, type: 2}
   bushSprite: {fileID: 11400000, guid: 59a0d6a7bba7be04290ca1d6b3b1b7f1, type: 2}
   treeSprite: {fileID: 11400000, guid: 2df2eac88654d7a4bbc9164814b60ff9, type: 2}
+  controller: {fileID: 9100000, guid: 80876c9a6c220cd40b8ab68fe490533e, type: 2}

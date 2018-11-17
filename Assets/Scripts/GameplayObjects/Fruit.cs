@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fruit : MonoBehaviour
@@ -24,6 +23,8 @@ public class Fruit : MonoBehaviour
     private bool falling;
 
     int multiplier = 0;
+    [HideInInspector]
+    public TreeType treeType;
 
     void Awake()
     {
@@ -70,9 +71,9 @@ public class Fruit : MonoBehaviour
     {
         shadow.transform.localScale = transform.lossyScale;
 
-        if (rigidbody.velocity.SqrMagnitude() < 0.12f)
-        { multiplier = 0;
-
+        if (rigidbody.velocity.SqrMagnitude() < 1.12f)
+        {
+            multiplier = 0;
         }
     }
 
@@ -87,6 +88,11 @@ public class Fruit : MonoBehaviour
             height += rigidbody.position.y - lastPosition;
         }
         lastPosition = rigidbody.position.y;
+
+        if (rigidbody.velocity.magnitude > 30)
+        {
+            rigidbody.velocity = rigidbody.velocity.normalized * 20;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -105,7 +111,8 @@ public class Fruit : MonoBehaviour
             Destroy(gameObject);
             other.gameObject.GetComponent<Collider2D>().enabled = false;
 
-            Instantiate(GameStateController.Instance.gameConfig.tree, other.transform.position, Quaternion.identity, other.transform);
+
+            Instantiate(treeType.prefabVariant, other.transform.position, Quaternion.identity, other.transform).GetComponent<TreeStateController>();
         }
 
         if (other.gameObject.layer == bumperBushLayer)
@@ -123,11 +130,12 @@ public class Fruit : MonoBehaviour
         if (other.gameObject.layer == flowerBushLayer)
         {
             Score.Instance.IncreaseScore(50);
-            Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
+
+            Vector2 direction = rigidbody.velocity;
             direction = direction.normalized;
 
             int sign = Random.value < .5 ? 1 : -1;
-            float angle = sign * 40 * Mathf.Deg2Rad;
+            float angle = sign * 120 * Mathf.Deg2Rad;
             float cos = Mathf.Cos(angle);
             float sin = Mathf.Sin(angle);
 
@@ -135,9 +143,7 @@ public class Fruit : MonoBehaviour
             float y2 = direction.x * sin + direction.y * cos;
             direction = new Vector2(x2, y2);
 
-
-            rigidbody.AddForce(500 * direction.normalized * Time.deltaTime);
-            //rigidbody.AddForce(rigidbody.velocity.magnitude * 2 * direction.normalized);
+            rigidbody.AddForce(rigidbody.velocity.magnitude * 1 * direction.normalized,ForceMode2D.Impulse);
         }
     }
 
@@ -173,5 +179,5 @@ public class Fruit : MonoBehaviour
         perSecond = true;
         yield return null;
     }
-    
+
 }

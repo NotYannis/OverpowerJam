@@ -5,6 +5,8 @@ using UnityEngine;
 public class TreeType : ScriptableObject
 {
     [SerializeField]
+    public GameObject prefabVariant;
+    [SerializeField]
     public SpriteVariable fruitSprite;
     [SerializeField]
     public SpriteVariable seedlingSprite;
@@ -12,4 +14,7 @@ public class TreeType : ScriptableObject
     public SpriteVariable bushSprite;
     [SerializeField]
     public SpriteVariable treeSprite;
+
+    [SerializeField]
+    public RuntimeAnimatorController controller;
 }

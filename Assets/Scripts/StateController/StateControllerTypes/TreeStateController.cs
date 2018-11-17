@@ -13,7 +13,7 @@ public class TreeStateController : StateController
     [HideInInspector] public bool isSoftlyWatered;
     [HideInInspector] public bool isStronglyWatered;
     [SerializeField] private Fruit[] fruits;
-    [SerializeField] private TreeType treeType;
+    [SerializeField] public TreeType treeType;
     private new SpriteRenderer renderer;
     private int lastTimeWateredFrameCount;
 
@@ -33,15 +33,17 @@ public class TreeStateController : StateController
         strongWaterLayer = LayerMask.NameToLayer("StrongWater");
         renderer = GetComponent<SpriteRenderer>();
 
+
         lifeTimeSprites[0] = treeType.seedlingSprite.value;
         lifeTimeSprites[1] = treeType.bushSprite.value;
         lifeTimeSprites[2] = treeType.treeSprite.value;
 
         renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
-
+        
         for (int i = 0; i < fruits.Length; i++)
         {
             fruits[i].gameObject.SetActive(false);
+            fruits[i].treeType = treeType;
         }
     }
 
@@ -51,6 +53,9 @@ public class TreeStateController : StateController
         {
             fruits[i].spriteRenderer.sprite = treeType.fruitSprite.value;
         }
+        bushAnimator[0] = treeType.controller;
+        GetComponent<Animator>().runtimeAnimatorController = treeType.controller;
+        renderer.sprite = treeType.seedlingSprite.value;
     }
 
     protected override void Update()
@@ -79,7 +84,6 @@ public class TreeStateController : StateController
 
     private void LateUpdate()
     {
-
         if (currentLifeTimeindex == 0)
         {
             GetComponent<Animator>().SetBool("isWatered", false);
@@ -104,6 +108,7 @@ public class TreeStateController : StateController
         for (int i = 0; i < fruits.Length; i++)
         {
             fruits[i].gameObject.SetActive(true);
+            fruits[i].treeType = treeType;
         }
     }
 
@@ -119,6 +124,7 @@ public class TreeStateController : StateController
 
     public void UpdateSprite(Sprite sprite)
     {
+        shadows[currentLifeTimeindex].SetActive(false);
         currentLifeTimeindex++;
 
         if (lifeTimeSprites.Length > currentLifeTimeindex)
@@ -126,21 +132,30 @@ public class TreeStateController : StateController
             GetComponent<Animator>().runtimeAnimatorController = bushAnimator[currentLifeTimeindex];
             renderer.sprite = lifeTimeSprites[currentLifeTimeindex];
 
+        shadows[currentLifeTimeindex].SetActive(true);
             GetComponent<CircleCollider2D>().offset += Vector2.up * 0.2f;
             GetComponent<CircleCollider2D>().radius += 0.1f;
 
         }
         else
         {
+            shadows[currentLifeTimeindex].SetActive(true);
+
             renderer.sprite = lifeTimeSprites[lifeTimeSprites.Length - 1];
         }
     }
-
+    [SerializeField]
+    GameObject[] shadows = new GameObject[3];
     private void OnParticleCollision(GameObject other)
     {
         if (currentLifeTimeindex == 0)
         {
             GetComponent<Animator>().SetBool("isWatered", true);
+
+            if (other.transform.position.x > transform.position.x)
+                renderer.flipX = true;
+            else
+                renderer.flipX = false;
         }
         if (other.layer == softWaterLayer)
         {
