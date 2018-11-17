@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fruit : MonoBehaviour
@@ -24,6 +23,8 @@ public class Fruit : MonoBehaviour
     private bool falling;
 
     int multiplier = 0;
+    [HideInInspector]
+    public TreeType treeType;
 
     void Awake()
     {
@@ -105,7 +106,8 @@ public class Fruit : MonoBehaviour
             Destroy(gameObject);
             other.gameObject.GetComponent<Collider2D>().enabled = false;
 
-            Instantiate(GameStateController.Instance.gameConfig.tree, other.transform.position, Quaternion.identity, other.transform);
+
+            Instantiate(treeType.prefabVariant, other.transform.position, Quaternion.identity, other.transform).GetComponent<TreeStateController>();
         }
 
         if (other.gameObject.layer == bumperBushLayer)

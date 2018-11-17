@@ -11474,6 +11474,11 @@ PrefabInstance:
       propertyPath: blastParticleSystem
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6322850016941974457, guid: 486371cf3c3bfc54ba69f934ea8e6cda,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 301677213, guid: 486371cf3c3bfc54ba69f934ea8e6cda, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 486371cf3c3bfc54ba69f934ea8e6cda, type: 3}
