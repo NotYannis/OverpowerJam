@@ -142,9 +142,7 @@ public class Fruit : MonoBehaviour
             float y2 = direction.x * sin + direction.y * cos;
             direction = new Vector2(x2, y2);
 
-
-            rigidbody.AddForce(rigidbody.velocity.magnitude * direction.normalized);
-            //rigidbody.AddForce(rigidbody.velocity.magnitude * 2 * direction.normalized);
+            rigidbody.AddForce(rigidbody.velocity.magnitude * 2 * direction.normalized);
         }
     }
 
@@ -180,5 +178,5 @@ public class Fruit : MonoBehaviour
         perSecond = true;
         yield return null;
     }
-    
+
 }
