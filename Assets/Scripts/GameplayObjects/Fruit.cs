@@ -130,11 +130,12 @@ public class Fruit : MonoBehaviour
         if (other.gameObject.layer == flowerBushLayer)
         {
             Score.Instance.IncreaseScore(50);
-            Vector2 direction = gameObject.transform.position - other.gameObject.transform.position;
+
+            Vector2 direction = rigidbody.velocity;
             direction = direction.normalized;
 
             int sign = Random.value < .5 ? 1 : -1;
-            float angle = sign * 90 * Mathf.Deg2Rad;
+            float angle = sign * 120 * Mathf.Deg2Rad;
             float cos = Mathf.Cos(angle);
             float sin = Mathf.Sin(angle);
 
@@ -142,7 +143,7 @@ public class Fruit : MonoBehaviour
             float y2 = direction.x * sin + direction.y * cos;
             direction = new Vector2(x2, y2);
 
-            rigidbody.AddForce(rigidbody.velocity.magnitude * 2 * direction.normalized);
+            rigidbody.AddForce(rigidbody.velocity.magnitude * 1 * direction.normalized,ForceMode2D.Impulse);
         }
     }
 
