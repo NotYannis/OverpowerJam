@@ -170,7 +170,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 85dffdcebd274d24087ec95fd50a71ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -309,11 +309,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2734779642836442727, guid: 220a7a72f181d3d4fa5f571aa04ec392,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7099475624289239076, guid: 220a7a72f181d3d4fa5f571aa04ec392,
         type: 3}
       propertyPath: height
@@ -328,11 +323,6 @@ PrefabInstance:
         type: 3}
       propertyPath: bumperForce
       value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2734779642836442727, guid: 220a7a72f181d3d4fa5f571aa04ec392,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 220a7a72f181d3d4fa5f571aa04ec392, type: 3}
@@ -392,11 +382,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2734779642836442727, guid: 220a7a72f181d3d4fa5f571aa04ec392,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7099475624289239076, guid: 220a7a72f181d3d4fa5f571aa04ec392,
         type: 3}
@@ -467,11 +452,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2734779642836442727, guid: 220a7a72f181d3d4fa5f571aa04ec392,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7099475624289239076, guid: 220a7a72f181d3d4fa5f571aa04ec392,
         type: 3}
       propertyPath: height
@@ -486,11 +466,6 @@ PrefabInstance:
         type: 3}
       propertyPath: bumperForce
       value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2734779642836442727, guid: 220a7a72f181d3d4fa5f571aa04ec392,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 220a7a72f181d3d4fa5f571aa04ec392, type: 3}
@@ -531,11 +506,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2734779642836442727, guid: 220a7a72f181d3d4fa5f571aa04ec392,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7099475624289239076, guid: 220a7a72f181d3d4fa5f571aa04ec392,
         type: 3}
       propertyPath: height
@@ -550,11 +520,6 @@ PrefabInstance:
         type: 3}
       propertyPath: bumperForce
       value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2734779642836442727, guid: 220a7a72f181d3d4fa5f571aa04ec392,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 220a7a72f181d3d4fa5f571aa04ec392, type: 3}
