@@ -129,7 +129,7 @@ public class Fruit : MonoBehaviour
             direction = direction.normalized;
 
             int sign = Random.value < .5 ? 1 : -1;
-            float angle = sign * 40 * Mathf.Deg2Rad;
+            float angle = sign * 90 * Mathf.Deg2Rad;
             float cos = Mathf.Cos(angle);
             float sin = Mathf.Sin(angle);
 
@@ -138,7 +138,7 @@ public class Fruit : MonoBehaviour
             direction = new Vector2(x2, y2);
 
 
-            rigidbody.AddForce(500 * direction.normalized * Time.deltaTime);
+            rigidbody.AddForce(rigidbody.velocity.magnitude * direction.normalized);
             //rigidbody.AddForce(rigidbody.velocity.magnitude * 2 * direction.normalized);
         }
     }
