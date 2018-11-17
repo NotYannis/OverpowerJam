@@ -71,9 +71,9 @@ public class Fruit : MonoBehaviour
     {
         shadow.transform.localScale = transform.lossyScale;
 
-        if (rigidbody.velocity.SqrMagnitude() < 0.12f)
-        { multiplier = 0;
-
+        if (rigidbody.velocity.SqrMagnitude() < 1.12f)
+        {
+            multiplier = 0;
         }
     }
 
@@ -88,6 +88,11 @@ public class Fruit : MonoBehaviour
             height += rigidbody.position.y - lastPosition;
         }
         lastPosition = rigidbody.position.y;
+
+        if (rigidbody.velocity.magnitude > 30)
+        {
+            rigidbody.velocity = rigidbody.velocity.normalized * 20;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
